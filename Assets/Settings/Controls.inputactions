@@ -1,0 +1,34 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "Spacecraft",
+            "id": "cc2e36f6-25eb-4029-a601-e99a472c844e",
+            "actions": [
+                {
+                    "name": "TranslateForward",
+                    "type": "PassThrough",
+                    "id": "7c61a094-ec26-471e-a706-7e8d8bfd9814",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8913a7d8-1387-45d7-902f-890b67728a09",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

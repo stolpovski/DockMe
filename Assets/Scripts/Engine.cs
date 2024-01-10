@@ -1,119 +1,41 @@
-using Photon.Pun;
+using System;
 using UnityEngine;
 
-public class Engine : MonoBehaviourPunCallbacks
+public class Engine : MonoBehaviour
 {
-    public Thruster[] thrusters;
-    
-    //Rigidbody rb;
-    float force;
+    [SerializeField]
+    private float _force = 1f;
 
-    int[] translateForwardIds = {0};
-    int[] translateBackIds = {2};
-    int[] translateLeftIds = {3};
-    int[] translateRightIds = {1};
-    int[] translateUpIds = {4};
-    int[] translateDownIds = {5};
+    [SerializeField]
+    private ParticleSystem _vfx;
 
-    private void Awake()
+    [SerializeField]
+    private AudioSource _sfx;
+
+    [NonSerialized]
+    public Rigidbody RB;
+
+    private bool _isRunning;
+
+    public void Run()
     {
-        foreach (Thruster thr in thrusters)
-        {
-            TryGetComponent<Rigidbody>(out thr.body);
-        }
-        
-        //rb = GetComponent<Rigidbody>();
-    }
-    private void Update()
-    {
-        if (photonView.IsMine)
-        {
-            
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateForwardIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.W))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateForwardIds);
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateBackIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.S))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateBackIds);
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateLeftIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateLeftIds);
-            }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateRightIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.D))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateRightIds);
-            }
-
-
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateUpIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateUpIds);
-            }
-
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                photonView.RPC("Burn", RpcTarget.All, translateDownIds);
-            }
-
-            if (Input.GetKeyUp(KeyCode.Q))
-            {
-                photonView.RPC("Stop", RpcTarget.All, translateDownIds);
-            }
-
-
-
-        }
+        _vfx.Play();
+        _sfx.Play();
+        _isRunning = true;
     }
 
-    [PunRPC]
-    private void Burn(int[] ids)
+    public void Stop()
     {
-        foreach(int id in ids)
-        {
-            thrusters[id].Burn();
-        }
-        
+        _vfx.Stop();
+        _sfx.Stop();
+        _isRunning = false;
     }
 
-    [PunRPC]
-    private void Stop(int[] ids)
+    private void FixedUpdate()
     {
-        foreach (int id in ids)
+        if (_isRunning)
         {
-            thrusters[id].Stop();
+            RB.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position);
         }
     }
 }

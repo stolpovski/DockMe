@@ -4839,7 +4839,7 @@ GameObject:
   - component: {fileID: 2901707991466976974}
   - component: {fileID: 1036197605340054089}
   m_Layer: 0
-  m_Name: Thruster
+  m_Name: Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4874,9 +4874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d8882f006f7ee41b7a9f228d255522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  vfx: {fileID: 25764824371602448}
-  sfx: {fileID: 7661081981613475202}
+  _force: 1
+  _vfx: {fileID: 25764824371602448}
+  _sfx: {fileID: 7661081981613475202}
 --- !u!1 &8676950514158778440
 GameObject:
   m_ObjectHideFlags: 0
