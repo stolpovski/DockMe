@@ -3,7 +3,27 @@ guid: 6e6d7211c29d8254181fdc116f6bb62b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mir_Antenna
+    second: {fileID: 2100000, guid: ab2e87c1e45613347b6eddb312de9d1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mir_GoldFoil
+    second: {fileID: 2100000, guid: b75b8e8823d8c17418efd92dd5496aa0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mir_White_Isolation
+    second: {fileID: 2100000, guid: cd3bed4fb34375d41959e3f069552944, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mir_color
+    second: {fileID: 2100000, guid: 0563b6f84f7f5484fa28da92ba3dc114, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
