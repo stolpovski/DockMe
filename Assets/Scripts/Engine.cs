@@ -35,7 +35,7 @@ public class Engine : MonoBehaviour
     {
         if (_isRunning)
         {
-            RB.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position);
+            RB.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position, ForceMode.Impulse);
         }
     }
 }
