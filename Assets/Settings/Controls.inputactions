@@ -2,7 +2,7 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Spacecraft",
+            "name": "Position",
             "id": "cc2e36f6-25eb-4029-a601-e99a472c844e",
             "actions": [
                 {
@@ -12,6 +12,24 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateDown",
+                    "type": "PassThrough",
+                    "id": "b31697d5-463b-44b5-adf2-01633f99b153",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotationMode",
+                    "type": "Button",
+                    "id": "fb167c48-32c7-4019-8d6b-c2aedfe1e75f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -24,6 +42,76 @@
                     "processors": "",
                     "groups": "",
                     "action": "TranslateForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f96ef93c-85df-4513-be32-ccb9f40c9f81",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d90a5f2-ff6b-4511-83cc-32c038210391",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotationMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Rotation",
+            "id": "fa3b5fe8-5610-4749-8342-c55ab10046ec",
+            "actions": [
+                {
+                    "name": "PitchUp",
+                    "type": "PassThrough",
+                    "id": "63c381db-c46c-442f-869d-d92e0ff75a01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PositionMode",
+                    "type": "Button",
+                    "id": "5e4fc54a-f816-41c4-8d4e-133d886a8cb8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1b86ecc0-82b0-4608-ba49-afc56e2ae598",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PitchUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df0976e8-880f-41d1-8e86-47bbfaae38ca",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PositionMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

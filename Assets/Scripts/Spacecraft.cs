@@ -8,31 +8,20 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     private Engine[] _engines;
 
     [SerializeField]
-    private int[] _translateForwardEngines;
+    private PositionEngines _positionEngines;
+
+    [SerializeField]
+    private RotationEngines _rotationEngines;
+
+    private PlayerInput _playerInput;
 
     private void Awake()
     {
+        _playerInput = GetComponent<PlayerInput>();
+
         foreach (Engine engine in _engines)
         {
             TryGetComponent<Rigidbody>(out engine.RB);
-        }
-    }
-
-    public void OnTranslateForward(InputAction.CallbackContext context)
-    {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-
-        if (context.started)
-        {
-            photonView.RPC("RunEngines", RpcTarget.All, _translateForwardEngines);
-        }
-
-        if (context.canceled)
-        {
-            photonView.RPC("StopEngines", RpcTarget.All, _translateForwardEngines);
         }
     }
 
@@ -51,6 +40,101 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         foreach (int i in engines)
         {
             _engines[i].Stop();
+        }
+    }
+
+    private void HandleEngines(InputAction.CallbackContext context, int[] engines)
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+        if (context.started)
+        {
+            photonView.RPC("RunEngines", RpcTarget.All, engines);
+        }
+
+        if (context.canceled)
+        {
+            photonView.RPC("StopEngines", RpcTarget.All, engines);
+        }
+    }
+    
+    public void OnTranslateForward(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Forward);
+    }
+
+    public void OnTranslateBackward(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Backward);
+    }
+
+    public void OnTranslateRight(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Right);
+    }
+
+    public void OnTranslateLeft(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Left);
+    }
+
+    public void OnTranslateUp(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Up);
+    }
+
+    public void OnTranslateDown(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _positionEngines.Down);
+    }
+
+    public void OnPitchUp(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.PitchUp);
+        Debug.Log("pitch up");
+    }
+
+    public void OnPitchDown(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.PitchDown);
+    }
+
+    public void OnYawRight(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.YawRight);
+    }
+
+    public void OnYawLeft(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.YawLeft);
+    }
+
+    public void OnRollRight(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.RollRight);
+    }
+
+    public void OnRollLeft(InputAction.CallbackContext context)
+    {
+        HandleEngines(context, _rotationEngines.RollLeft);
+    }
+
+    public void OnRotationMode(InputAction.CallbackContext context)
+    {
+        if (photonView.IsMine && context.performed)
+        {
+            _playerInput.SwitchCurrentActionMap("Rotation");
+        }
+    }
+
+    public void OnPositionMode(InputAction.CallbackContext context)
+    {
+        if (photonView.IsMine && context.performed)
+        {
+            _playerInput.SwitchCurrentActionMap("Position");
         }
     }
 }
