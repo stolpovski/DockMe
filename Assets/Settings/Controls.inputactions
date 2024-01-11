@@ -7,26 +7,35 @@
             "actions": [
                 {
                     "name": "TranslateForward",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "7c61a094-ec26-471e-a706-7e8d8bfd9814",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "TranslateDown",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "b31697d5-463b-44b5-adf2-01633f99b153",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "RotationMode",
                     "type": "Button",
                     "id": "fb167c48-32c7-4019-8d6b-c2aedfe1e75f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeColor",
+                    "type": "Button",
+                    "id": "ad71eabd-e250-4aff-87b8-3683add8de71",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -66,6 +75,17 @@
                     "action": "RotationMode",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10253f61-7993-4036-b065-cf3ae62baf39",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeColor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -75,11 +95,11 @@
             "actions": [
                 {
                     "name": "PitchUp",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "63c381db-c46c-442f-869d-d92e0ff75a01",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {

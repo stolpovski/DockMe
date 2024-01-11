@@ -703,6 +703,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5e4fc54a-f816-41c4-8d4e-133d886a8cb8
     m_ActionName: Rotation/PositionMode[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2310672821834876676}
+        m_TargetAssemblyTypeName: Spacecraft, Assembly-CSharp
+        m_MethodName: OnChangeColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ad71eabd-e250-4aff-87b8-3683add8de71
+    m_ActionName: Position/ChangeColor[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Position

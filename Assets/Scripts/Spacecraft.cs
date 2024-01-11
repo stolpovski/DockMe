@@ -43,6 +43,8 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         }
     }
 
+    
+
     private void HandleEngines(InputAction.CallbackContext context, int[] engines)
     {
         if (!photonView.IsMine)
@@ -136,5 +138,20 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         {
             _playerInput.SwitchCurrentActionMap("Position");
         }
+    }
+
+    [PunRPC]
+    private void RandomColor(float R, float G, float B)
+    {
+        GetComponentInChildren<Renderer>().materials[1].SetColor("_Color", new Color(R, G, B));
+    }
+
+    public void OnChangeColor(InputAction.CallbackContext context)
+    {
+        if (photonView.IsMine && context.started)
+        {
+            photonView.RPC("RandomColor", RpcTarget.All, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        }
+            
     }
 }
