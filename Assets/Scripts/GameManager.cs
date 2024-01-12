@@ -40,8 +40,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         else
         {
+            Quaternion rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, 20)), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, 20)), rotation, 0);
         }
     }
 }
