@@ -15,13 +15,24 @@ public class Spacecraft : MonoBehaviourPunCallbacks
 
     private PlayerInput _playerInput;
 
+    private Renderer _renderer;
+
     private void Awake()
     {
+        _renderer = GetComponentInChildren<Renderer>();
         _playerInput = GetComponent<PlayerInput>();
 
         foreach (Engine engine in _engines)
         {
             TryGetComponent<Rigidbody>(out engine.RB);
+        }
+    }
+
+    private void Start()
+    {
+        if (photonView.IsMine)
+        {
+            ChangeColor();
         }
     }
 
@@ -143,15 +154,22 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RandomColor(float R, float G, float B)
     {
-        GetComponentInChildren<Renderer>().materials[1].SetColor("_Color", new Color(R, G, B));
+        _renderer.materials[1].SetColor("_Color", new Color(R, G, B));
     }
 
     public void OnChangeColor(InputAction.CallbackContext context)
     {
         if (photonView.IsMine && context.started)
         {
-            photonView.RPC("RandomColor", RpcTarget.All, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            ChangeColor();
         }
             
     }
+
+    private void ChangeColor()
+    {
+        photonView.RPC("RandomColor", RpcTarget.AllBuffered, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+    }
+
+    
 }
