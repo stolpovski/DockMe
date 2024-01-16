@@ -2,13 +2,49 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Position",
+            "name": "Spacecraft",
             "id": "cc2e36f6-25eb-4029-a601-e99a472c844e",
             "actions": [
                 {
                     "name": "TranslateForward",
                     "type": "Button",
                     "id": "7c61a094-ec26-471e-a706-7e8d8bfd9814",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateBackward",
+                    "type": "Button",
+                    "id": "0d545233-77aa-4172-9def-893148d0f771",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateRight",
+                    "type": "Button",
+                    "id": "186c2d43-10ac-433b-b4ab-d7a74cbfe985",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateLeft",
+                    "type": "Button",
+                    "id": "48deacfe-bfd2-4fe4-8eec-1a725e5677e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateUp",
+                    "type": "Button",
+                    "id": "bed88444-80c4-472a-8041-6017b4e5286a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -24,9 +60,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RotationMode",
+                    "name": "PitchUp",
                     "type": "Button",
-                    "id": "fb167c48-32c7-4019-8d6b-c2aedfe1e75f",
+                    "id": "32070eb8-eaed-4edf-92e6-cea493f51658",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -67,17 +103,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3d90a5f2-ff6b-4511-83cc-32c038210391",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotationMode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "10253f61-7993-4036-b065-cf3ae62baf39",
                     "path": "<Keyboard>/c",
                     "interactions": "",
@@ -86,36 +111,10 @@
                     "action": "ChangeColor",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Rotation",
-            "id": "fa3b5fe8-5610-4749-8342-c55ab10046ec",
-            "actions": [
-                {
-                    "name": "PitchUp",
-                    "type": "Button",
-                    "id": "63c381db-c46c-442f-869d-d92e0ff75a01",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
-                    "name": "PositionMode",
-                    "type": "Button",
-                    "id": "5e4fc54a-f816-41c4-8d4e-133d886a8cb8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
                     "name": "",
-                    "id": "1b86ecc0-82b0-4608-ba49-afc56e2ae598",
+                    "id": "6d569035-f700-42ce-8c4b-2d139da88c95",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -126,12 +125,45 @@
                 },
                 {
                     "name": "",
-                    "id": "df0976e8-880f-41d1-8e86-47bbfaae38ca",
-                    "path": "<Keyboard>/tab",
+                    "id": "1f1ffbdf-c7f7-4eec-b534-23fad39692f8",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PositionMode",
+                    "action": "TranslateUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd816759-43bc-4c12-9896-a7f877799f7b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb740f87-73b3-427d-8cd8-304c693c6495",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34a6fb62-9ef8-4da7-9837-e02b9cce6d8c",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
