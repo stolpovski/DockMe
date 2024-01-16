@@ -32,7 +32,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            ChangeColor();
+            RandomizeColor();
         }
     }
 
@@ -152,7 +152,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void RandomColor(float R, float G, float B)
+    private void ChangeColor(float R, float G, float B)
     {
         _renderer.materials[1].SetColor("_Color", new Color(R, G, B));
     }
@@ -161,14 +161,14 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine && context.started)
         {
-            ChangeColor();
+            RandomizeColor();
         }
             
     }
 
-    private void ChangeColor()
+    private void RandomizeColor()
     {
-        photonView.RPC("RandomColor", RpcTarget.AllBuffered, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
     

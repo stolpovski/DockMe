@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 794415161588478530, guid: bf513b3982fd0db42a179474be3ef3e0, type: 3}
-  IsRotate: 0
+  IsRotate: 1
 --- !u!4 &1746707792
 Transform:
   m_ObjectHideFlags: 0
