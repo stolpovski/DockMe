@@ -19,6 +19,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         _renderer = GetComponentInChildren<Renderer>();
         _playerInput = GetComponent<PlayerInput>();
 

@@ -69,6 +69,51 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PitchDown",
+                    "type": "Button",
+                    "id": "2a42ec56-e11a-4581-845f-924d343f64bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "YawRight",
+                    "type": "Button",
+                    "id": "77725865-dcb3-4dc9-8640-ffc10a66139d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "YawLeft",
+                    "type": "Button",
+                    "id": "0ed0c2c3-540d-49b7-8253-14f30f45d786",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RollRight",
+                    "type": "Button",
+                    "id": "7231fd94-fd44-4b7e-994c-d38388a64ccb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RollLeft",
+                    "type": "Button",
+                    "id": "5748db88-4fcc-4b31-93f9-37f874b7a24c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ChangeColor",
                     "type": "Button",
                     "id": "ad71eabd-e250-4aff-87b8-3683add8de71",
@@ -115,7 +160,7 @@
                 {
                     "name": "",
                     "id": "6d569035-f700-42ce-8c4b-2d139da88c95",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -164,6 +209,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "TranslateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b74ba2c4-86ee-466a-9306-e8c5f5c83f86",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PitchDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07abaa0a-e777-43c7-b3cb-7caf727c4f79",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "YawRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8056bcc7-88e5-44c2-b90c-1f7c34dfc450",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "YawLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08749662-085d-40a8-aa0c-ba5f31af2624",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RollRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "043b89be-5cb0-4727-92a8-bf48e5fb8a29",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RollLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
