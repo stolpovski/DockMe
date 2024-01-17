@@ -19,7 +19,6 @@ public class Spacecraft : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         _renderer = GetComponentInChildren<Renderer>();
         _playerInput = GetComponent<PlayerInput>();
 
@@ -108,7 +107,6 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     public void OnPitchUp(InputAction.CallbackContext context)
     {
         HandleEngines(context, _rotationEngines.PitchUp);
-        Debug.Log("pitch up");
     }
 
     public void OnPitchDown(InputAction.CallbackContext context)

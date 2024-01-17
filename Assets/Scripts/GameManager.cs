@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -49,5 +50,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
             PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, 20)), _rotation, 0);
         }
+    }
+
+    public void OnLeave()
+    {
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel(0);
     }
 }
