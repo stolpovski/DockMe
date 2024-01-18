@@ -2,39 +2,47 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
 
     [SerializeField]
-    GameObject _label;
+    TMP_Text _label;
 
     [SerializeField]
-    GameObject _connectBtn;
+    Button _connectBtn;
 
     [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
     [SerializeField]
     private byte maxPlayersPerRoom = 4;
 
+    private void Awake()
+    {
+        _label.enabled = false;
+    }
+
 
     public void OnConnect()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        _connectBtn.SetActive(false);
-        _label.SetActive(true);
+        _connectBtn.interactable = false;
+        _label.SetText("Connecting...");
+        _label.enabled = true;
         Connect();
     }
 
     private void Connect()
     {
+        
         PhotonNetwork.ConnectUsingSettings();
 
     }
 
     public override void OnConnectedToMaster()
     {
-
+        //PhotonNetwork.Disconnect();return;
         PhotonNetwork.NickName = "Player_" + Random.Range(0, 10);
         Debug.Log("OnConnectedToMaster() was called by PUN");
         PhotonNetwork.JoinRandomRoom();
@@ -43,6 +51,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
+        _connectBtn.interactable = true;
+        _label.SetText("Connection failed");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
