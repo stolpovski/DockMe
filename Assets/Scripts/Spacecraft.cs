@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 public class Spacecraft : MonoBehaviourPunCallbacks
 {
     [SerializeField]
+    public GameObject PlayerUiPrefab;
+    
+    [SerializeField]
     private Engine[] _engines;
 
     [SerializeField]
@@ -34,6 +37,18 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         {
             RandomizeColor();
         }
+
+        if (PlayerUiPrefab != null && !photonView.IsMine)
+        {
+            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
+
+        
     }
 
     [PunRPC]
@@ -170,5 +185,6 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         photonView.RPC("ChangeColor", RpcTarget.AllBuffered, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
+    
     
 }

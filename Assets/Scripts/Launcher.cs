@@ -8,12 +8,17 @@ using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    const string playerNamePrefKey = "PlayerName";
+    const string defaultName = "UFO";
 
     [SerializeField]
     TMP_Text _label;
 
     [SerializeField]
     Button _connectBtn;
+
+    [SerializeField]
+    TMP_InputField _playerName;
 
     [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
     [SerializeField]
@@ -22,12 +27,22 @@ public class Launcher : MonoBehaviourPunCallbacks
     private void Awake()
     {
         _label.enabled = false;
+        _connectBtn.interactable = false;
+        //PlayerPrefs.DeleteKey(playerNamePrefKey);
+
+        if (PlayerPrefs.HasKey(playerNamePrefKey))
+        {
+            _connectBtn.interactable = true;
+            _playerName.text = PlayerPrefs.GetString(playerNamePrefKey);
+        }
+        _playerName.Select();
     }
 
 
     public void OnConnect()
     {
         _connectBtn.interactable = false;
+        _playerName.interactable = false;
         _label.SetText("Connecting...");
         _label.enabled = true;
         Connect();
@@ -40,10 +55,24 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     }
 
+    public void SetPlayerName(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            _connectBtn.interactable = false;
+            return;
+        }
+        
+        PhotonNetwork.NickName = name;
+        PlayerPrefs.SetString(playerNamePrefKey, name);
+        Debug.Log("SetPlayerName");
+        _connectBtn.interactable = true;
+    }
+
     public override void OnConnectedToMaster()
     {
         //PhotonNetwork.Disconnect();return;
-        PhotonNetwork.NickName = "Player_" + Random.Range(0, 10);
+        //PhotonNetwork.NickName = "Player_" + Random.Range(0, 10);
         Debug.Log("OnConnectedToMaster() was called by PUN");
         PhotonNetwork.JoinRandomRoom();
     }

@@ -1,12 +1,16 @@
 using Cinemachine;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Look : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    TMP_Text _log;
     [SerializeField]
     private GameObject _menu;
     private bool hasEscaped;
@@ -26,6 +30,16 @@ public class Look : MonoBehaviourPunCallbacks
         {
             cam.Priority = 0;
         }
+    }
+
+    public override void OnPlayerEnteredRoom(Player other)
+    {
+        _log.SetText(other.NickName + " joined");
+    }
+
+    public override void OnPlayerLeftRoom(Player other)
+    {
+        _log.SetText(other.NickName + " left");
     }
 
     public void OnZoom(InputAction.CallbackContext context)
