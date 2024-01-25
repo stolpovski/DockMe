@@ -1,9 +1,13 @@
 using Photon.Pun;
+using Photon.Voice.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Spacecraft : MonoBehaviourPunCallbacks
 {
+    public Recorder recorder;
+    public AudioSource radioIntro;
+    public AudioSource radioOutro;
     [SerializeField]
     public GameObject PlayerUiPrefab;
     
@@ -24,6 +28,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     {
         _renderer = GetComponentInChildren<Renderer>();
         _playerInput = GetComponent<PlayerInput>();
+        recorder = GameObject.Find("Recorder").GetComponent<Recorder>();
 
         foreach (Engine engine in _engines)
         {
@@ -185,6 +190,39 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         photonView.RPC("ChangeColor", RpcTarget.AllBuffered, Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
     }
 
-    
+    public void OnRadio(InputAction.CallbackContext context)
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        
+        if (context.started)
+        {
+            recorder.TransmitEnabled = true;
+            photonView.RPC("Beep", RpcTarget.Others, true);
+        }
+
+        if (context.canceled)
+        {
+            recorder.TransmitEnabled = false;
+            photonView.RPC("Beep", RpcTarget.Others, false);
+        }
+    }
+
+    [PunRPC]
+    private void Beep(bool isIntro)
+    {
+        if (isIntro)
+        {
+            radioOutro.Stop();
+            radioIntro.Play();
+        }
+        else
+        {
+            radioIntro.Stop();
+            radioOutro.Play();
+        }
+    }
     
 }
