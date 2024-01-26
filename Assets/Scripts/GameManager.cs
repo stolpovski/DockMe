@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnLeave()
     {
-        PhotonNetwork.Disconnect();
+        PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel(0);
     }
 }
