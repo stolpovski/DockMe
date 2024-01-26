@@ -1,0 +1,34 @@
+{
+    "name": "GameInput",
+    "maps": [
+        {
+            "name": "Engine",
+            "id": "349f6a64-1bf5-4c3c-b005-2838fc50631a",
+            "actions": [
+                {
+                    "name": "TranslateForward",
+                    "type": "Button",
+                    "id": "0a3d541f-562f-4684-b21e-0b8d903c4314",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7e8117b9-5237-40e7-a7f9-2190b6362776",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

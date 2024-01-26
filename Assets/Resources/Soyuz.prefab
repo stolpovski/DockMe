@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 2310672821834876676}
   - component: {fileID: 5337256365859658614}
   - component: {fileID: 8981898843628305553}
+  - component: {fileID: 1752049401807245638}
   m_Layer: 0
   m_Name: Soyuz
   m_TagString: Untagged
@@ -905,6 +906,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1752049401807245638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794415161588478530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89ecc5b1a971234884d2d671f546bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engines: []
 --- !u!1 &1922486592020604813
 GameObject:
   m_ObjectHideFlags: 3

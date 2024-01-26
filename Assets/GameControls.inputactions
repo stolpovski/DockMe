@@ -1,0 +1,62 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "Common",
+            "id": "2877b87d-baeb-480d-98d2-8139eda8bc40",
+            "actions": [
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "c63e95de-23ee-45df-9253-776c9265e8b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e9b34839-61e2-4064-b61d-f15dec09d6be",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Car",
+            "id": "13307d44-77be-4041-bd23-5595b0459a93",
+            "actions": [
+                {
+                    "name": "Forward",
+                    "type": "Button",
+                    "id": "38c95d8b-d912-440c-a2bb-b576cc86c077",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4b844ee7-e5da-4a81-8355-ae2495c0a44c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
