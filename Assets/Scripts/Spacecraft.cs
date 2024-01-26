@@ -74,7 +74,39 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    private void StartEnginesSfx(int[] engines)
+    {
+        foreach (int i in engines)
+        {
+            _engines[i].StartSFX();
+        }
+    }
+
+    private void StopEnginesSfx(int[] engines)
+    {
+        foreach (int i in engines)
+        {
+            _engines[i].StopSFX();
+        }
+    }
+
+    private void StartBurning(int[] engines)
+    {
+        foreach (int i in engines)
+        {
+            _engines[i].StartBurning();
+        }
+    }
+
+    private void StopBurning(int[] engines)
+    {
+        foreach (int i in engines)
+        {
+            _engines[i].StopBurning();
+        }
+    }
+
+
 
     private void HandleEngines(InputAction.CallbackContext context, int[] engines)
     {
@@ -85,14 +117,18 @@ public class Spacecraft : MonoBehaviourPunCallbacks
 
         if (context.started)
         {
+            StartBurning(engines);
             StartEnginesVfx(engines);
+            StartEnginesSfx(engines);
             // StartEngines(engines);
             photonView.RPC("StartEnginesVfx", RpcTarget.Others, engines);
         }
 
         if (context.canceled)
         {
+            StopBurning(engines);
             StopEnginesVfx(engines);
+            StopEnginesSfx(engines);
             photonView.RPC("StopEnginesVfx", RpcTarget.Others, engines);
         }
     }
