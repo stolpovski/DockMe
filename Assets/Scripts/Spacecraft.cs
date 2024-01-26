@@ -57,20 +57,20 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void RunEngines(int[] engines)
+    private void StartEnginesVfx(int[] engines)
     {
         foreach (int i in engines)
         {
-            _engines[i].Run();
+            _engines[i].StartVFX();
         }
     }
 
     [PunRPC]
-    private void StopEngines(int[] engines)
+    private void StopEnginesVfx(int[] engines)
     {
         foreach (int i in engines)
         {
-            _engines[i].Stop();
+            _engines[i].StopVFX();
         }
     }
 
@@ -85,12 +85,15 @@ public class Spacecraft : MonoBehaviourPunCallbacks
 
         if (context.started)
         {
-            photonView.RPC("RunEngines", RpcTarget.All, engines);
+            StartEnginesVfx(engines);
+            // StartEngines(engines);
+            photonView.RPC("StartEnginesVfx", RpcTarget.Others, engines);
         }
 
         if (context.canceled)
         {
-            photonView.RPC("StopEngines", RpcTarget.All, engines);
+            StopEnginesVfx(engines);
+            photonView.RPC("StopEnginesVfx", RpcTarget.Others, engines);
         }
     }
     
@@ -199,30 +202,32 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         
         if (context.started)
         {
+            BeepIntro();
+            photonView.RPC("BeepIntro", RpcTarget.Others);
             recorder.TransmitEnabled = true;
-            photonView.RPC("Beep", RpcTarget.Others, true);
+            
         }
 
         if (context.canceled)
         {
+            BeepOutro();
+            photonView.RPC("BeepOutro", RpcTarget.Others);
             recorder.TransmitEnabled = false;
-            photonView.RPC("Beep", RpcTarget.Others, false);
+            
         }
     }
 
     [PunRPC]
-    private void Beep(bool isIntro)
+    private void BeepIntro()
     {
-        if (isIntro)
-        {
-            radioOutro.Stop();
-            radioIntro.Play();
-        }
-        else
-        {
-            radioIntro.Stop();
-            radioOutro.Play();
-        }
+        radioOutro.Stop();
+        radioIntro.Play();
     }
-    
+
+    [PunRPC]
+    private void BeepOutro()
+    {
+        radioIntro.Stop();
+        radioOutro.Play();
+    }
 }

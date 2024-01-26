@@ -15,25 +15,44 @@ public class Engine : MonoBehaviour
     [NonSerialized]
     public Rigidbody RB;
 
-    private bool _isRunning;
+    private bool isBurning;
 
-    public void Run()
+    public void StartBurning()
     {
-        _vfx.Play();
-        _sfx.Play();
-        _isRunning = true;
+        
+        isBurning = true;
     }
 
-    public void Stop()
+    public void StopBurning()
+    {
+        
+        isBurning = false;
+    }
+
+    public void StartVFX()
+    {
+        _vfx.Play();
+    }
+
+    public void StopVFX()
     {
         _vfx.Stop();
+    }
+
+    public void StartSFX()
+    {
+        _sfx.Play();
+    }
+
+    public void StopSFX()
+    {
         _sfx.Stop();
-        _isRunning = false;
+
     }
 
     private void FixedUpdate()
     {
-        if (_isRunning)
+        if (isBurning)
         {
             RB.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position, ForceMode.Impulse);
         }
