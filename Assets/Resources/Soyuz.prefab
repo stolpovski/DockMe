@@ -1023,7 +1023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922486592020604813}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.32020822, y: 0.6688727, z: 0.5423104, w: 0.39493722}
+  m_LocalRotation: {x: -0.32020834, y: 0.6688727, z: 0.5423103, w: 0.39493743}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1824,6 +1824,7 @@ GameObject:
   - component: {fileID: 4641655663007415003}
   - component: {fileID: 3448340090989698808}
   - component: {fileID: 3196479953454985808}
+  - component: {fileID: 1117204982386941105}
   - component: {fileID: 2157755145163589669}
   m_Layer: 0
   m_Name: Speaker
@@ -1866,7 +1867,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -1956,11 +1957,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playDelayConfig:
-    Low: 200
-    High: 200
+    Low: 0
+    High: 0
     Max: 1000
     SpeedUpPerc: 5
   restartOnDeviceChange: 1
+--- !u!170 &1117204982386941105
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647986494695508152}
+  m_Enabled: 1
+  m_DistortionLevel: 0.95
 --- !u!165 &2157755145163589669
 AudioHighPassFilter:
   m_ObjectHideFlags: 0
@@ -1969,7 +1979,7 @@ AudioHighPassFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3647986494695508152}
   m_Enabled: 1
-  m_CutoffFrequency: 1000
+  m_CutoffFrequency: 3000
   m_HighpassResonanceQ: 1
 --- !u!1 &3722161852123230742
 GameObject:
@@ -2878,7 +2888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6682263399823831370}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.33434293, y: 0.64873195, z: 0.5662493, w: 0.38304505}
+  m_LocalRotation: {x: -0.33434328, y: 0.64873177, z: 0.5662491, w: 0.38304538}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3016,7 +3026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309700155948690979}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.327339, y: 0.65889764, z: 0.55438715, w: 0.38904753}
+  m_LocalRotation: {x: -0.3273391, y: 0.65889764, z: 0.55438703, w: 0.38904765}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
