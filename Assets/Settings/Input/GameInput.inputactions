@@ -2,6 +2,54 @@
     "name": "GameInput",
     "maps": [
         {
+            "name": "Spacecraft",
+            "id": "8a225835-7224-463c-9267-8791229d9cb1",
+            "actions": [
+                {
+                    "name": "ChangeView",
+                    "type": "Button",
+                    "id": "000e7f9e-7af5-4555-baf2-a356914f2774",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleFlashlight",
+                    "type": "Button",
+                    "id": "1dba014a-6144-4224-8231-e6de209c2df2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "31d18dd1-141b-4602-af53-7f6a72dba6d9",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeView",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b3e6ec6-2fd1-471a-8813-86d7acec065a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFlashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Engine",
             "id": "349f6a64-1bf5-4c3c-b005-2838fc50631a",
             "actions": [

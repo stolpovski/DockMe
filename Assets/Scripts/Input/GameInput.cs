@@ -24,6 +24,54 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     ""name"": ""GameInput"",
     ""maps"": [
         {
+            ""name"": ""Spacecraft"",
+            ""id"": ""8a225835-7224-463c-9267-8791229d9cb1"",
+            ""actions"": [
+                {
+                    ""name"": ""ChangeView"",
+                    ""type"": ""Button"",
+                    ""id"": ""000e7f9e-7af5-4555-baf2-a356914f2774"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleFlashlight"",
+                    ""type"": ""Button"",
+                    ""id"": ""1dba014a-6144-4224-8231-e6de209c2df2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""31d18dd1-141b-4602-af53-7f6a72dba6d9"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeView"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b3e6ec6-2fd1-471a-8813-86d7acec065a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleFlashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Engine"",
             ""id"": ""349f6a64-1bf5-4c3c-b005-2838fc50631a"",
             ""actions"": [
@@ -54,6 +102,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
+        // Spacecraft
+        m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
+        m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
+        m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
         // Engine
         m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
         m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
@@ -115,6 +167,60 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
+    // Spacecraft
+    private readonly InputActionMap m_Spacecraft;
+    private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
+    private readonly InputAction m_Spacecraft_ChangeView;
+    private readonly InputAction m_Spacecraft_ToggleFlashlight;
+    public struct SpacecraftActions
+    {
+        private @GameInput m_Wrapper;
+        public SpacecraftActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeView => m_Wrapper.m_Spacecraft_ChangeView;
+        public InputAction @ToggleFlashlight => m_Wrapper.m_Spacecraft_ToggleFlashlight;
+        public InputActionMap Get() { return m_Wrapper.m_Spacecraft; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SpacecraftActions set) { return set.Get(); }
+        public void AddCallbacks(ISpacecraftActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Add(instance);
+            @ChangeView.started += instance.OnChangeView;
+            @ChangeView.performed += instance.OnChangeView;
+            @ChangeView.canceled += instance.OnChangeView;
+            @ToggleFlashlight.started += instance.OnToggleFlashlight;
+            @ToggleFlashlight.performed += instance.OnToggleFlashlight;
+            @ToggleFlashlight.canceled += instance.OnToggleFlashlight;
+        }
+
+        private void UnregisterCallbacks(ISpacecraftActions instance)
+        {
+            @ChangeView.started -= instance.OnChangeView;
+            @ChangeView.performed -= instance.OnChangeView;
+            @ChangeView.canceled -= instance.OnChangeView;
+            @ToggleFlashlight.started -= instance.OnToggleFlashlight;
+            @ToggleFlashlight.performed -= instance.OnToggleFlashlight;
+            @ToggleFlashlight.canceled -= instance.OnToggleFlashlight;
+        }
+
+        public void RemoveCallbacks(ISpacecraftActions instance)
+        {
+            if (m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISpacecraftActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SpacecraftActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SpacecraftActions @Spacecraft => new SpacecraftActions(this);
+
     // Engine
     private readonly InputActionMap m_Engine;
     private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
@@ -160,6 +266,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public EngineActions @Engine => new EngineActions(this);
+    public interface ISpacecraftActions
+    {
+        void OnChangeView(InputAction.CallbackContext context);
+        void OnToggleFlashlight(InputAction.CallbackContext context);
+    }
     public interface IEngineActions
     {
         void OnTranslateForward(InputAction.CallbackContext context);
