@@ -476,7 +476,7 @@ MonoBehaviour:
   _label: {fileID: 849289473}
   _connectBtn: {fileID: 1229343067}
   _playerName: {fileID: 442464386}
-  maxPlayersPerRoom: 4
+  maxPlayersPerRoom: 10
 --- !u!4 &593768967
 Transform:
   m_ObjectHideFlags: 0

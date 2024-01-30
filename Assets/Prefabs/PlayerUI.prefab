@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: {fileID: 4375470854215606246}
-  screenOffset: {x: 0, y: 30, z: 0}
+  screenOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &5666096722189683732
 GameObject:
   m_ObjectHideFlags: 0

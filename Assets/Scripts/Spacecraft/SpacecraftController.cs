@@ -19,12 +19,12 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
         _gameInput.Spacecraft.ToggleFlashlight.performed += context => ToggleFlashlight();
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
         _gameInput.Spacecraft.Enable();
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         _gameInput.Spacecraft.Disable();
     }

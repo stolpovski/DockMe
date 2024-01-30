@@ -43,7 +43,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
             RandomizeColor();
         }
 
-        if (PlayerUiPrefab != null && !photonView.IsMine)
+        if (PlayerUiPrefab != null)
         {
             GameObject _uiGo = Instantiate(PlayerUiPrefab);
             _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);

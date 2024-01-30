@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (IsRotate) _rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            //PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, 20)), _rotation, 0);
-            PhotonNetwork.Instantiate(this.playerPrefab.name, _startPosition, _startRotation, 0);
+            PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, -40)), _rotation, 0);
+            //PhotonNetwork.Instantiate(this.playerPrefab.name, _startPosition, _startRotation, 0);
         }
     }
 

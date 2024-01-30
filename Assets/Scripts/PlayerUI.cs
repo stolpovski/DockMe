@@ -10,7 +10,7 @@ public class PlayerUI : MonoBehaviour
     TMP_Text playerName;
 
     [SerializeField]
-    private Vector3 screenOffset = new Vector3(0f, 30f, 0f);
+    private Vector3 screenOffset = new Vector3(0f, 0f, 0f);
 
     float characterControllerHeight = 0f;
     Transform targetTransform;
@@ -51,16 +51,7 @@ public class PlayerUI : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-    }
 
-    void Awake()
-    {
-        this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
-        _canvasGroup = this.GetComponent<CanvasGroup>();
-    }
-
-    void LateUpdate()
-    {
         // Do not show the UI if we are not visible to the camera, thus avoid potential bugs with seeing the UI, but not the player itself.
         if (targetRenderer != null)
         {
@@ -76,4 +67,11 @@ public class PlayerUI : MonoBehaviour
             this.transform.position = Camera.main.WorldToScreenPoint(targetPosition) + screenOffset;
         }
     }
+
+    void Awake()
+    {
+        this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
+        _canvasGroup = this.GetComponent<CanvasGroup>();
+    }
+
 }
