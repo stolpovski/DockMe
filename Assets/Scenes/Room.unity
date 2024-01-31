@@ -853,7 +853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 794415161588478530, guid: bf513b3982fd0db42a179474be3ef3e0, type: 3}
   _randomize: 1
-  _startPosition: {x: 0.005, y: 0, z: -15}
+  _startPosition: {x: 0.005, y: 0, z: -30}
   _startRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &1746707792
 Transform:

@@ -3,6 +3,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _flashlight;
     [SerializeField] private TMP_Text _angVelVal;
     [SerializeField] private TMP_Text _angDeltaVal;
+    [SerializeField] private GameObject _SSVProbe;
     private void Awake()
     {
         _dockPanel.SetActive(false);
@@ -82,8 +84,19 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
         _angVelVal.SetText(String.Format("{0:F3}\n{1:F3}\n{2:F3}", angVel.x, angVel.y, angVel.z));
 
         Vector3 _angDelta = transform.rotation.eulerAngles;
-        _angDeltaVal.SetText(String.Format("{0:F1}\n{1:F1}\n{2:F1}", _angDelta.x, _angDelta.y, _angDelta.z));
+        float distance = Vector3.Distance(_SSVProbe.transform.position, new Vector3(0.01f, 0.00f, -10.28f));
 
-        //Debug.Log(_angDelta);
+
+
+        _angDeltaVal.SetText(String.Format(
+            "{0:F2}\n{1:F2}\n\n{2:F1}\n{3:F1}\n{4:F1}",
+            _body.velocity.magnitude,
+            distance,
+            _angDelta.x > 180 ? 360 - _angDelta.x : -_angDelta.x, 
+            _angDelta.y > 180 ? _angDelta.y - 360 : _angDelta.y,
+            _angDelta.z > 180 ? 360 - _angDelta.z : -_angDelta.z
+        ));
+
+        //Debug.Log(distance);
     }
 }
