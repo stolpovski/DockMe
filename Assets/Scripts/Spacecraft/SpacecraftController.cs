@@ -81,7 +81,7 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
     private void Update()
     {
         Vector3 angVel = _body.angularVelocity;
-        _angVelVal.SetText(String.Format("{0:F3}\n{1:F3}\n{2:F3}", angVel.x, angVel.y, angVel.z));
+        _angVelVal.SetText(String.Format("{0:F4}\n{1:F4}\n{2:F4}", angVel.z * 57.2958, angVel.y * 57.2958, angVel.x * 57.2958));
 
         Vector3 _angDelta = transform.rotation.eulerAngles;
         float distance = Vector3.Distance(_SSVProbe.transform.position, new Vector3(0.01f, 0.00f, -10.28f));
@@ -97,6 +97,6 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
             _angDelta.z > 180 ? 360 - _angDelta.z : -_angDelta.z
         ));
 
-        //Debug.Log(distance);
+        //Debug.Log(_angDelta);
     }
 }

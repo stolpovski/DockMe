@@ -94,7 +94,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     {
         foreach (int i in engines)
         {
-            _engines[i].StartBurning();
+            if (_engines[i].isActiveAndEnabled) _engines[i].StartBurning();
         }
     }
 
