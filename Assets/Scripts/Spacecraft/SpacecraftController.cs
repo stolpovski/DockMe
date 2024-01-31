@@ -1,18 +1,24 @@
 using Cinemachine;
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpacecraftController : MonoBehaviourPunCallbacks
 {
+    private Rigidbody _body;
     private GameInput _gameInput;
     //[SerializeField] private CinemachineFreeLook _lookCamera;
     [SerializeField] private CinemachineVirtualCamera _dockCamera;
     [SerializeField] private GameObject _dockPanel;
     [SerializeField] private GameObject _flashlight;
+    [SerializeField] private TMP_Text _angVelVal;
     private void Awake()
     {
+        _dockPanel.SetActive(false);
+        _body = GetComponent<Rigidbody>();
         _gameInput = new GameInput();
 
         _gameInput.Spacecraft.ChangeView.performed += context => ChangeView();
@@ -65,5 +71,13 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
         {
             _flashlight.SetActive(false);
         }
+
+        
+    }
+
+    private void Update()
+    {
+        Vector3 angVel = _body.angularVelocity;
+        _angVelVal.SetText(String.Format("{0:F3}\n{1:F3}\n{2:F3}", angVel.x, angVel.y, angVel.z));
     }
 }
