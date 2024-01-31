@@ -15,6 +15,7 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject _dockPanel;
     [SerializeField] private GameObject _flashlight;
     [SerializeField] private TMP_Text _angVelVal;
+    [SerializeField] private TMP_Text _angDeltaVal;
     private void Awake()
     {
         _dockPanel.SetActive(false);
@@ -79,5 +80,10 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
     {
         Vector3 angVel = _body.angularVelocity;
         _angVelVal.SetText(String.Format("{0:F3}\n{1:F3}\n{2:F3}", angVel.x, angVel.y, angVel.z));
+
+        Vector3 _angDelta = transform.rotation.eulerAngles;
+        _angDeltaVal.SetText(String.Format("{0:F1}\n{1:F1}\n{2:F1}", _angDelta.x, _angDelta.y, _angDelta.z));
+
+        //Debug.Log(_angDelta);
     }
 }
