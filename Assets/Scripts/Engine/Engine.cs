@@ -3,58 +3,86 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
-    [SerializeField]
-    private float _force = 1f;
-
-    [SerializeField]
-    private ParticleSystem _vfx;
-
-    [SerializeField]
-    private AudioSource _sfx;
-
-    [NonSerialized]
-    public Rigidbody RB;
-
-    private bool isBurning;
-
-    public void StartBurning()
+    [Serializable]
+    public struct PositionThrusters
     {
-        
-        isBurning = true;
+        public int[] Right;
+        public int[] Left;
+        public int[] Up;
+        public int[] Down;
+        public int[] Forward;
+        public int[] Backward;
     }
 
-    public void StopBurning()
-    {
-        
-        isBurning = false;
-    }
+    private GameInput _input;
 
-    public void StartVFX()
-    {
-        _vfx.Play();
-    }
+    [SerializeField] private Thruster[] _thrusters;
+    [SerializeField] private PositionThrusters _positionThrusters;
 
-    public void StopVFX()
+    private void Awake()
     {
-        _vfx.Stop();
-    }
-
-    public void StartSFX()
-    {
-        _sfx.Play();
-    }
-
-    public void StopSFX()
-    {
-        _sfx.Stop();
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (isBurning)
+        foreach (Thruster thruster in _thrusters)
         {
-            RB.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position, ForceMode.Impulse);
+            TryGetComponent<Rigidbody>(out thruster.Body);
+        }
+
+        _input = new GameInput();
+
+        _input.Engine.TranslateX.performed += context => Ignite(context.ReadValue<float>(), _positionThrusters.Right, _positionThrusters.Left);
+        _input.Engine.TranslateX.canceled += context => Cutoff(_positionThrusters.Right, _positionThrusters.Left);
+
+        _input.Engine.TranslateY.performed += context => Ignite(context.ReadValue<float>(), _positionThrusters.Up, _positionThrusters.Down);
+        _input.Engine.TranslateY.canceled += context => Cutoff(_positionThrusters.Up, _positionThrusters.Down);
+
+        _input.Engine.TranslateZ.performed += context => Ignite(context.ReadValue<float>(), _positionThrusters.Forward, _positionThrusters.Backward);
+        _input.Engine.TranslateZ.canceled += context => Cutoff(_positionThrusters.Forward, _positionThrusters.Backward);
+    }
+
+    private void OnEnable()
+    {
+        _input.Engine.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _input.Engine.Disable();
+    }
+
+    private void Ignite(float value, int[] positiveThrusterIds, int[] negativeThrusterIds)
+    {
+        int[] affectedThrusterIds;
+
+        if (value > 0)
+        {
+            affectedThrusterIds = positiveThrusterIds;
+        }
+        else
+        {
+            affectedThrusterIds = negativeThrusterIds;
+        }
+        
+        foreach (int id in affectedThrusterIds)
+        {
+            _thrusters[id].IgniteVfx();
+            _thrusters[id].IgniteSfx();
+            _thrusters[id].Ignite();
+        }
+    }
+
+    private void Cutoff(int[] positiveThrusterIds, int[] negativeThrusterIds)
+    {
+        foreach (int id in positiveThrusterIds)
+        {
+            _thrusters[id].CutoffVfx();
+            _thrusters[id].CutoffSfx();
+            _thrusters[id].Cutoff();
+        }
+
+        foreach (int id in negativeThrusterIds)
+        {
+            _thrusters[id].CutoffVfx();
+            _thrusters[id].CutoffSfx();
+            _thrusters[id].Cutoff();
         }
     }
 }

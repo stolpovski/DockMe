@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviourPunCallbacks
+public class UI0 : MonoBehaviourPunCallbacks
 {
     public Button btn;
     public void OnLeave()

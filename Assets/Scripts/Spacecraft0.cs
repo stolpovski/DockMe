@@ -3,7 +3,7 @@ using Photon.Voice.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Spacecraft : MonoBehaviourPunCallbacks
+public class Spacecraft0 : MonoBehaviourPunCallbacks
 {
     public Recorder recorder;
     public AudioSource radioIntro;
@@ -12,7 +12,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
     public GameObject PlayerUiPrefab;
     
     [SerializeField]
-    private Engine[] _engines;
+    private Engine0[] _engines;
 
     [SerializeField]
     private PositionEngines _positionEngines;
@@ -30,7 +30,7 @@ public class Spacecraft : MonoBehaviourPunCallbacks
         _playerInput = GetComponent<PlayerInput>();
         recorder = GameObject.Find("Recorder").GetComponent<Recorder>();
 
-        foreach (Engine engine in _engines)
+        foreach (Engine0 engine in _engines)
         {
             TryGetComponent<Rigidbody>(out engine.RB);
         }

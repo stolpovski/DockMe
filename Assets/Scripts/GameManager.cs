@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject playerPrefab;
 
     [SerializeField] private bool _randomize;
+    [SerializeField] private float _randomAngle = 45f;
 
     [SerializeField] private Vector3 _startPosition;
     [SerializeField] private Quaternion _startRotation;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (_randomize)
             {
                 _startPosition = new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Random.Range(-20, -40));
-                _startRotation = Quaternion.Euler(Random.Range(-90, 90), Random.Range(-90, 90), Random.Range(-90, 90));
+                _startRotation = Quaternion.Euler(Random.Range(-_randomAngle, _randomAngle), Random.Range(-_randomAngle, _randomAngle), Random.Range(-_randomAngle, _randomAngle));
             }
                 
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate

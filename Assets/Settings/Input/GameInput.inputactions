@@ -39,7 +39,7 @@
                 {
                     "name": "",
                     "id": "3b3e6ec6-2fd1-471a-8813-86d7acec065a",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/capsLock",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -54,9 +54,27 @@
             "id": "349f6a64-1bf5-4c3c-b005-2838fc50631a",
             "actions": [
                 {
-                    "name": "TranslateForward",
+                    "name": "TranslateX",
                     "type": "Button",
-                    "id": "0a3d541f-562f-4684-b21e-0b8d903c4314",
+                    "id": "5b10f7eb-2446-463e-83ae-e075a5101a6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateY",
+                    "type": "Button",
+                    "id": "fe3c98ad-a00b-496f-9630-d1318a19d08e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TranslateZ",
+                    "type": "Button",
+                    "id": "85427b98-9c2b-4368-bf77-467e5d442fd8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -65,15 +83,103 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "7e8117b9-5237-40e7-a7f9-2190b6362776",
+                    "name": "1D Axis",
+                    "id": "e3abb22b-2197-4728-a845-b9f3fb058c5d",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateX",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "623733df-99c0-4d9c-ac7c-5f60af18a1cc",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateX",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6353ceec-530b-44d1-8268-a3edad2ededc",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateX",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "d74c2705-2e4d-4460-8fc6-4432fb581b23",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateY",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "3848bd55-78ff-447f-b661-42cc35ace8f9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cbcd1fa3-3401-4148-b949-ecae63750a0d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateY",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "4cce5782-d32f-4c29-8cb2-d005b83bf287",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateZ",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "0d541c58-671c-4823-9a19-b57a2ccd3489",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TranslateZ",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b762d60a-985d-4c54-a805-f4399cf1e589",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TranslateForward",
+                    "action": "TranslateZ",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

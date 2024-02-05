@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private string[] _launchCommands;
     const string playerNamePrefKey = "PlayerName";
     const string defaultName = "UFO";
 
@@ -38,14 +39,41 @@ public class Launcher : MonoBehaviourPunCallbacks
         _playerName.Select();
     }
 
+    IEnumerator ConnectingCoroutine()
+    {
+        _label.SetText("");
+        _label.enabled = true;
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        foreach (string cmd in _launchCommands)
+        {
+            _label.SetText(cmd);
+            yield return new WaitForSeconds(Random.Range(0.2f, 0.4f));
+
+            
+        }
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
+
 
     public void OnConnect()
     {
-        _connectBtn.interactable = false;
         _playerName.interactable = false;
-        _label.SetText("Connecting...");
-        _label.enabled = true;
+        _connectBtn.interactable = false;
+
+        
+
+        StartCoroutine(ConnectingCoroutine());
+
         Connect();
+
+        
     }
 
     private void Connect()
@@ -81,7 +109,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
         _connectBtn.interactable = true;
-        _label.SetText("Connection failed");
+        //_label.SetText("Connection failed");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

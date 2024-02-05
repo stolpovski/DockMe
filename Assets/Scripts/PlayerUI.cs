@@ -18,9 +18,9 @@ public class PlayerUI : MonoBehaviour
     CanvasGroup _canvasGroup;
     Vector3 targetPosition;
 
-    private Spacecraft target;
+    private Spacecraft0 target;
 
-    public void SetTarget(Spacecraft _target)
+    public void SetTarget(Spacecraft0 _target)
     {
         if (_target == null)
         {

@@ -61,7 +61,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3b3e6ec6-2fd1-471a-8813-86d7acec065a"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/capsLock"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -76,9 +76,27 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ""id"": ""349f6a64-1bf5-4c3c-b005-2838fc50631a"",
             ""actions"": [
                 {
-                    ""name"": ""TranslateForward"",
+                    ""name"": ""TranslateX"",
                     ""type"": ""Button"",
-                    ""id"": ""0a3d541f-562f-4684-b21e-0b8d903c4314"",
+                    ""id"": ""5b10f7eb-2446-463e-83ae-e075a5101a6b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateY"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe3c98ad-a00b-496f-9630-d1318a19d08e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateZ"",
+                    ""type"": ""Button"",
+                    ""id"": ""85427b98-9c2b-4368-bf77-467e5d442fd8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -87,15 +105,103 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""7e8117b9-5237-40e7-a7f9-2190b6362776"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e3abb22b-2197-4728-a845-b9f3fb058c5d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateX"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""623733df-99c0-4d9c-ac7c-5f60af18a1cc"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6353ceec-530b-44d1-8268-a3edad2ededc"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""d74c2705-2e4d-4460-8fc6-4432fb581b23"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateY"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""3848bd55-78ff-447f-b661-42cc35ace8f9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""cbcd1fa3-3401-4148-b949-ecae63750a0d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""4cce5782-d32f-4c29-8cb2-d005b83bf287"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateZ"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0d541c58-671c-4823-9a19-b57a2ccd3489"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b762d60a-985d-4c54-a805-f4399cf1e589"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TranslateForward"",
+                    ""action"": ""TranslateZ"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -108,7 +214,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
         // Engine
         m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
-        m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
+        m_Engine_TranslateX = m_Engine.FindAction("TranslateX", throwIfNotFound: true);
+        m_Engine_TranslateY = m_Engine.FindAction("TranslateY", throwIfNotFound: true);
+        m_Engine_TranslateZ = m_Engine.FindAction("TranslateZ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -224,12 +332,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     // Engine
     private readonly InputActionMap m_Engine;
     private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
-    private readonly InputAction m_Engine_TranslateForward;
+    private readonly InputAction m_Engine_TranslateX;
+    private readonly InputAction m_Engine_TranslateY;
+    private readonly InputAction m_Engine_TranslateZ;
     public struct EngineActions
     {
         private @GameInput m_Wrapper;
         public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TranslateForward => m_Wrapper.m_Engine_TranslateForward;
+        public InputAction @TranslateX => m_Wrapper.m_Engine_TranslateX;
+        public InputAction @TranslateY => m_Wrapper.m_Engine_TranslateY;
+        public InputAction @TranslateZ => m_Wrapper.m_Engine_TranslateZ;
         public InputActionMap Get() { return m_Wrapper.m_Engine; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,16 +351,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
-            @TranslateForward.started += instance.OnTranslateForward;
-            @TranslateForward.performed += instance.OnTranslateForward;
-            @TranslateForward.canceled += instance.OnTranslateForward;
+            @TranslateX.started += instance.OnTranslateX;
+            @TranslateX.performed += instance.OnTranslateX;
+            @TranslateX.canceled += instance.OnTranslateX;
+            @TranslateY.started += instance.OnTranslateY;
+            @TranslateY.performed += instance.OnTranslateY;
+            @TranslateY.canceled += instance.OnTranslateY;
+            @TranslateZ.started += instance.OnTranslateZ;
+            @TranslateZ.performed += instance.OnTranslateZ;
+            @TranslateZ.canceled += instance.OnTranslateZ;
         }
 
         private void UnregisterCallbacks(IEngineActions instance)
         {
-            @TranslateForward.started -= instance.OnTranslateForward;
-            @TranslateForward.performed -= instance.OnTranslateForward;
-            @TranslateForward.canceled -= instance.OnTranslateForward;
+            @TranslateX.started -= instance.OnTranslateX;
+            @TranslateX.performed -= instance.OnTranslateX;
+            @TranslateX.canceled -= instance.OnTranslateX;
+            @TranslateY.started -= instance.OnTranslateY;
+            @TranslateY.performed -= instance.OnTranslateY;
+            @TranslateY.canceled -= instance.OnTranslateY;
+            @TranslateZ.started -= instance.OnTranslateZ;
+            @TranslateZ.performed -= instance.OnTranslateZ;
+            @TranslateZ.canceled -= instance.OnTranslateZ;
         }
 
         public void RemoveCallbacks(IEngineActions instance)
@@ -273,6 +397,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     }
     public interface IEngineActions
     {
-        void OnTranslateForward(InputAction.CallbackContext context);
+        void OnTranslateX(InputAction.CallbackContext context);
+        void OnTranslateY(InputAction.CallbackContext context);
+        void OnTranslateZ(InputAction.CallbackContext context);
     }
 }

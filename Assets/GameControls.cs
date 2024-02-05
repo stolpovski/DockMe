@@ -63,6 +63,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8a29bbe-443f-4e6d-b9ea-47a3a4cb80c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -76,6 +85,39 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Forward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""51635f2c-987f-4ce4-934d-ccbf55ea4ede"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eca973e4-f45f-456a-90d4-495a6b3f4ddb"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""274079bb-5d68-4ba0-8fe5-6c89f0bcab33"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -88,6 +130,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         // Car
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Forward = m_Car.FindAction("Forward", throwIfNotFound: true);
+        m_Car_Pitch = m_Car.FindAction("Pitch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,11 +239,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Car;
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Forward;
+    private readonly InputAction m_Car_Pitch;
     public struct CarActions
     {
         private @GameControls m_Wrapper;
         public CarActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Forward => m_Wrapper.m_Car_Forward;
+        public InputAction @Pitch => m_Wrapper.m_Car_Pitch;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -213,6 +258,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Forward.started += instance.OnForward;
             @Forward.performed += instance.OnForward;
             @Forward.canceled += instance.OnForward;
+            @Pitch.started += instance.OnPitch;
+            @Pitch.performed += instance.OnPitch;
+            @Pitch.canceled += instance.OnPitch;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -220,6 +268,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Forward.started -= instance.OnForward;
             @Forward.performed -= instance.OnForward;
             @Forward.canceled -= instance.OnForward;
+            @Pitch.started -= instance.OnPitch;
+            @Pitch.performed -= instance.OnPitch;
+            @Pitch.canceled -= instance.OnPitch;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -244,5 +295,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     public interface ICarActions
     {
         void OnForward(InputAction.CallbackContext context);
+        void OnPitch(InputAction.CallbackContext context);
     }
 }
