@@ -76,6 +76,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ""id"": ""349f6a64-1bf5-4c3c-b005-2838fc50631a"",
             ""actions"": [
                 {
+                    ""name"": ""TranslateZ"",
+                    ""type"": ""Button"",
+                    ""id"": ""85427b98-9c2b-4368-bf77-467e5d442fd8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""TranslateX"",
                     ""type"": ""Button"",
                     ""id"": ""5b10f7eb-2446-463e-83ae-e075a5101a6b"",
@@ -88,15 +97,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""TranslateY"",
                     ""type"": ""Button"",
                     ""id"": ""fe3c98ad-a00b-496f-9630-d1318a19d08e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TranslateZ"",
-                    ""type"": ""Button"",
-                    ""id"": ""85427b98-9c2b-4368-bf77-467e5d442fd8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -214,9 +214,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
         // Engine
         m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
+        m_Engine_TranslateZ = m_Engine.FindAction("TranslateZ", throwIfNotFound: true);
         m_Engine_TranslateX = m_Engine.FindAction("TranslateX", throwIfNotFound: true);
         m_Engine_TranslateY = m_Engine.FindAction("TranslateY", throwIfNotFound: true);
-        m_Engine_TranslateZ = m_Engine.FindAction("TranslateZ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,16 +332,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     // Engine
     private readonly InputActionMap m_Engine;
     private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
+    private readonly InputAction m_Engine_TranslateZ;
     private readonly InputAction m_Engine_TranslateX;
     private readonly InputAction m_Engine_TranslateY;
-    private readonly InputAction m_Engine_TranslateZ;
     public struct EngineActions
     {
         private @GameInput m_Wrapper;
         public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TranslateZ => m_Wrapper.m_Engine_TranslateZ;
         public InputAction @TranslateX => m_Wrapper.m_Engine_TranslateX;
         public InputAction @TranslateY => m_Wrapper.m_Engine_TranslateY;
-        public InputAction @TranslateZ => m_Wrapper.m_Engine_TranslateZ;
         public InputActionMap Get() { return m_Wrapper.m_Engine; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,28 +351,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
+            @TranslateZ.started += instance.OnTranslateZ;
+            @TranslateZ.performed += instance.OnTranslateZ;
+            @TranslateZ.canceled += instance.OnTranslateZ;
             @TranslateX.started += instance.OnTranslateX;
             @TranslateX.performed += instance.OnTranslateX;
             @TranslateX.canceled += instance.OnTranslateX;
             @TranslateY.started += instance.OnTranslateY;
             @TranslateY.performed += instance.OnTranslateY;
             @TranslateY.canceled += instance.OnTranslateY;
-            @TranslateZ.started += instance.OnTranslateZ;
-            @TranslateZ.performed += instance.OnTranslateZ;
-            @TranslateZ.canceled += instance.OnTranslateZ;
         }
 
         private void UnregisterCallbacks(IEngineActions instance)
         {
+            @TranslateZ.started -= instance.OnTranslateZ;
+            @TranslateZ.performed -= instance.OnTranslateZ;
+            @TranslateZ.canceled -= instance.OnTranslateZ;
             @TranslateX.started -= instance.OnTranslateX;
             @TranslateX.performed -= instance.OnTranslateX;
             @TranslateX.canceled -= instance.OnTranslateX;
             @TranslateY.started -= instance.OnTranslateY;
             @TranslateY.performed -= instance.OnTranslateY;
             @TranslateY.canceled -= instance.OnTranslateY;
-            @TranslateZ.started -= instance.OnTranslateZ;
-            @TranslateZ.performed -= instance.OnTranslateZ;
-            @TranslateZ.canceled -= instance.OnTranslateZ;
         }
 
         public void RemoveCallbacks(IEngineActions instance)
@@ -397,8 +397,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     }
     public interface IEngineActions
     {
+        void OnTranslateZ(InputAction.CallbackContext context);
         void OnTranslateX(InputAction.CallbackContext context);
         void OnTranslateY(InputAction.CallbackContext context);
-        void OnTranslateZ(InputAction.CallbackContext context);
     }
 }

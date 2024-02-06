@@ -54,6 +54,15 @@
             "id": "349f6a64-1bf5-4c3c-b005-2838fc50631a",
             "actions": [
                 {
+                    "name": "TranslateZ",
+                    "type": "Button",
+                    "id": "85427b98-9c2b-4368-bf77-467e5d442fd8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "TranslateX",
                     "type": "Button",
                     "id": "5b10f7eb-2446-463e-83ae-e075a5101a6b",
@@ -66,15 +75,6 @@
                     "name": "TranslateY",
                     "type": "Button",
                     "id": "fe3c98ad-a00b-496f-9630-d1318a19d08e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TranslateZ",
-                    "type": "Button",
-                    "id": "85427b98-9c2b-4368-bf77-467e5d442fd8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
