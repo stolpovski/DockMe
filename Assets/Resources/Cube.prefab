@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Propellant: 10
   lookCam: {fileID: 7631173432348525717}
+  PlayerUiPrefab: {fileID: 6381816467167184613, guid: 365eec3e4b7dc634aacc0e00b43ab338, type: 3}
 --- !u!114 &3533966697005915455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,12 +749,12 @@ MonoBehaviour:
   m_BindingMode: 5
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 4.5
-    m_Radius: 1.75
-  - m_Height: 2.5
-    m_Radius: 3
-  - m_Height: 0.4
-    m_Radius: 1.3
+  - m_Height: 5
+    m_Radius: 2
+  - m_Height: 0
+    m_Radius: 5
+  - m_Height: -5
+    m_Radius: 2
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 6434123271962260117}
