@@ -1,96 +1,111 @@
+using Photon.Pun;
 using System;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Engine : MonoBehaviour
+namespace DockMe
 {
-    [Serializable]
-    public struct PositionThrusters
+    public class Engine : MonoBehaviourPunCallbacks
     {
-        public int[] Forward;
-        public int[] Backward;
-        public int[] Right;
-        public int[] Left;
-        public int[] Up;
-        public int[] Down;
-    }
-
-    [SerializeField] private Thruster[] _thrusters;
-    [SerializeField] private PositionThrusters _positionThrusters;
-    [SerializeField] private bool _isSAS;
-
-    private GameInput _input;
-    private bool _wasPositiveTranslationZ;
-
-    private void Awake()
-    {
-        foreach (Thruster thruster in _thrusters)
+        [Serializable]
+        public struct PositionThrusters
         {
-            TryGetComponent<Rigidbody>(out thruster.Body);
+            public int[] Forward;
+            public int[] Backward;
+            public int[] Right;
+            public int[] Left;
+            public int[] Up;
+            public int[] Down;
         }
 
-        _input = new GameInput();
+        [SerializeField] private Thruster[] _thrusters;
+        [SerializeField] private PositionThrusters _positionThrusters;
 
-        _input.Engine.TranslateZ.performed += context => Ignite(context, _positionThrusters.Forward, _positionThrusters.Backward, context.ReadValue<float>());
-        _input.Engine.TranslateZ.canceled += context => Cutoff(context, _positionThrusters.Forward, _positionThrusters.Backward, _wasPositiveTranslationZ);
+        private GameInput _input;
+        private Rigidbody rb;
 
-        /*_input.Engine.TranslateX.performed += context => Ignite(context, _positionThrusters.Right, _positionThrusters.Left);
-        _input.Engine.TranslateX.canceled += context => Cutoff(context, _positionThrusters.Right.Concat(_positionThrusters.Left).ToArray());
+        private Spacecraft craft;
 
-        _input.Engine.TranslateY.performed += context => Ignite(context, _positionThrusters.Up, _positionThrusters.Down);
-        _input.Engine.TranslateY.canceled += context => Cutoff(context, _positionThrusters.Up.Concat(_positionThrusters.Down).ToArray());*/
-    }
-
-    private void OnEnable()
-    {
-        _input.Engine.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _input.Engine.Disable();
-    }
-
-    private void Ignite(InputAction.CallbackContext context, int[] positiveThrusterIds, int[] negativeThrusterIds, float value)
-    {
-        Debug.Log(context);
-        
-        int[] affectedThrusterIds;
-
-        if (value > 0)
+        private void Awake()
         {
-            affectedThrusterIds = positiveThrusterIds;
-            _wasPositiveTranslationZ = true;
-        }
-        else
-        {
-            affectedThrusterIds = negativeThrusterIds;
-            _wasPositiveTranslationZ = false;
-        }
-        
-        foreach (int id in affectedThrusterIds)
-        {
-            _thrusters[id].IgniteVfx();
-            _thrusters[id].IgniteSfx();
-            _thrusters[id].Ignite();
-        }
-    }
+            craft = GetComponent<Spacecraft>();
+            rb = GetComponent<Rigidbody>();
+            foreach (Thruster thruster in _thrusters)
+            {
+                TryGetComponent<Rigidbody>(out thruster.Body);
+                TryGetComponent<Spacecraft>(out thruster.Craft);
+            }
 
-    private void Cutoff(InputAction.CallbackContext context, int[] positiveThrusterIds, int[] negativeThrusterIds, bool wasPositive)
-    {
-        Debug.Log(context);
-        int[] affectedThrusters = wasPositive ? positiveThrusterIds : negativeThrusterIds;
-        foreach (int id in affectedThrusters)
-        {
-            _thrusters[id].CutoffVfx();
-            _thrusters[id].CutoffSfx();
-            _thrusters[id].Cutoff();
+            _input = new GameInput();
+
+            _input.Engine.TranslateForward.performed += context => IgniteThrusters(_positionThrusters.Forward);
+            _input.Engine.TranslateForward.canceled += context => CutoffThrusters(_positionThrusters.Forward);
+
+            _input.Engine.TranslateBackward.performed += context => IgniteThrusters(_positionThrusters.Backward);
+            _input.Engine.TranslateBackward.canceled += context => CutoffThrusters(_positionThrusters.Backward);
+
+            
         }
 
-        if (_isSAS)
+        override public void OnEnable()
         {
-            Ignite(context, positiveThrusterIds, negativeThrusterIds, wasPositive ? -1 : 1);
+            _input.Engine.Enable();
+        }
+
+        override public void OnDisable()
+        {
+            _input.Engine.Disable();
+        }
+
+        private void IgniteThrusters(int[] ids)
+        {
+            if (!photonView.IsMine || craft.Propellant < 0)
+            {
+                return;
+            }
+
+            foreach (int id in ids)
+            {
+                _thrusters[id].Ignite();
+                _thrusters[id].IgniteVfx();
+                _thrusters[id].IgniteSfx();
+            }
+
+            photonView.RPC("RPC_IgniteThrusters", RpcTarget.Others, ids);
+        }
+
+        [PunRPC]
+        private void RPC_IgniteThrusters(int[] ids)
+        {
+            foreach (int id in ids)
+            {
+                _thrusters[id].IgniteVfx();
+            }
+        }
+
+        [PunRPC]
+        private void RPC_CutoffThrusters(int[] ids)
+        {
+            foreach (int id in ids)
+            {
+                _thrusters[id].CutoffVfx();
+            }
+        }
+
+        private void CutoffThrusters(int[] ids)
+        {
+            if (!photonView.IsMine || craft.Propellant < 0)
+            {
+                return;
+            }
+            
+            foreach (int id in ids)
+            {
+                _thrusters[id].Cutoff();
+                _thrusters[id].CutoffVfx();
+                _thrusters[id].CutoffSfx();
+            }
+
+            photonView.RPC("RPC_CutoffThrusters", RpcTarget.Others, ids);
         }
     }
 }

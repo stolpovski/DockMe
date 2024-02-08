@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb99cfb592d62af4fa3449a65b8e4fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Propellant: 10
+  Propellant: 1
   lookCam: {fileID: 7631173432348525717}
   PlayerUiPrefab: {fileID: 6381816467167184613, guid: 365eec3e4b7dc634aacc0e00b43ab338, type: 3}
 --- !u!114 &3533966697005915455

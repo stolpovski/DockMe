@@ -50,6 +50,9 @@ MonoBehaviour:
   - BeepOutro
   - StartEnginesVfx
   - StopEnginesVfx
+  - UpdateProp
+  - RPC_IgniteThrusters
+  - RPC_CutoffThrusters
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

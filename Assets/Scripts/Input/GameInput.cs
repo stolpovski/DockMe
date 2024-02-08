@@ -24,6 +24,54 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     ""name"": ""GameInput"",
     ""maps"": [
         {
+            ""name"": ""Engine"",
+            ""id"": ""349f6a64-1bf5-4c3c-b005-2838fc50631a"",
+            ""actions"": [
+                {
+                    ""name"": ""TranslateForward"",
+                    ""type"": ""Button"",
+                    ""id"": ""b70ead54-75fc-44d3-a0ce-ce27fc663428"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateBackward"",
+                    ""type"": ""Button"",
+                    ""id"": ""c096d3be-2215-48c0-a742-28b74fefd631"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f993ff89-6e02-4bd5-8968-719fc7467544"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29b46e0f-7060-4ced-857b-2c92b8c6f32b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Spacecraft"",
             ""id"": ""8a225835-7224-463c-9267-8791229d9cb1"",
             ""actions"": [
@@ -70,153 +118,18 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Engine"",
-            ""id"": ""349f6a64-1bf5-4c3c-b005-2838fc50631a"",
-            ""actions"": [
-                {
-                    ""name"": ""TranslateZ"",
-                    ""type"": ""Button"",
-                    ""id"": ""85427b98-9c2b-4368-bf77-467e5d442fd8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TranslateX"",
-                    ""type"": ""Button"",
-                    ""id"": ""5b10f7eb-2446-463e-83ae-e075a5101a6b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TranslateY"",
-                    ""type"": ""Button"",
-                    ""id"": ""fe3c98ad-a00b-496f-9630-d1318a19d08e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""e3abb22b-2197-4728-a845-b9f3fb058c5d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateX"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""623733df-99c0-4d9c-ac7c-5f60af18a1cc"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""6353ceec-530b-44d1-8268-a3edad2ededc"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""d74c2705-2e4d-4460-8fc6-4432fb581b23"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateY"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""3848bd55-78ff-447f-b661-42cc35ace8f9"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateY"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""cbcd1fa3-3401-4148-b949-ecae63750a0d"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateY"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""4cce5782-d32f-4c29-8cb2-d005b83bf287"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateZ"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""0d541c58-671c-4823-9a19-b57a2ccd3489"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateZ"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""b762d60a-985d-4c54-a805-f4399cf1e589"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TranslateZ"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
 }");
+        // Engine
+        m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
+        m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
+        m_Engine_TranslateBackward = m_Engine.FindAction("TranslateBackward", throwIfNotFound: true);
         // Spacecraft
         m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
         m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
         m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
-        // Engine
-        m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
-        m_Engine_TranslateZ = m_Engine.FindAction("TranslateZ", throwIfNotFound: true);
-        m_Engine_TranslateX = m_Engine.FindAction("TranslateX", throwIfNotFound: true);
-        m_Engine_TranslateY = m_Engine.FindAction("TranslateY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -275,6 +188,60 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
+    // Engine
+    private readonly InputActionMap m_Engine;
+    private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
+    private readonly InputAction m_Engine_TranslateForward;
+    private readonly InputAction m_Engine_TranslateBackward;
+    public struct EngineActions
+    {
+        private @GameInput m_Wrapper;
+        public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TranslateForward => m_Wrapper.m_Engine_TranslateForward;
+        public InputAction @TranslateBackward => m_Wrapper.m_Engine_TranslateBackward;
+        public InputActionMap Get() { return m_Wrapper.m_Engine; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EngineActions set) { return set.Get(); }
+        public void AddCallbacks(IEngineActions instance)
+        {
+            if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
+            @TranslateForward.started += instance.OnTranslateForward;
+            @TranslateForward.performed += instance.OnTranslateForward;
+            @TranslateForward.canceled += instance.OnTranslateForward;
+            @TranslateBackward.started += instance.OnTranslateBackward;
+            @TranslateBackward.performed += instance.OnTranslateBackward;
+            @TranslateBackward.canceled += instance.OnTranslateBackward;
+        }
+
+        private void UnregisterCallbacks(IEngineActions instance)
+        {
+            @TranslateForward.started -= instance.OnTranslateForward;
+            @TranslateForward.performed -= instance.OnTranslateForward;
+            @TranslateForward.canceled -= instance.OnTranslateForward;
+            @TranslateBackward.started -= instance.OnTranslateBackward;
+            @TranslateBackward.performed -= instance.OnTranslateBackward;
+            @TranslateBackward.canceled -= instance.OnTranslateBackward;
+        }
+
+        public void RemoveCallbacks(IEngineActions instance)
+        {
+            if (m_Wrapper.m_EngineActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IEngineActions instance)
+        {
+            foreach (var item in m_Wrapper.m_EngineActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_EngineActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public EngineActions @Engine => new EngineActions(this);
+
     // Spacecraft
     private readonly InputActionMap m_Spacecraft;
     private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
@@ -328,77 +295,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public SpacecraftActions @Spacecraft => new SpacecraftActions(this);
-
-    // Engine
-    private readonly InputActionMap m_Engine;
-    private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
-    private readonly InputAction m_Engine_TranslateZ;
-    private readonly InputAction m_Engine_TranslateX;
-    private readonly InputAction m_Engine_TranslateY;
-    public struct EngineActions
+    public interface IEngineActions
     {
-        private @GameInput m_Wrapper;
-        public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TranslateZ => m_Wrapper.m_Engine_TranslateZ;
-        public InputAction @TranslateX => m_Wrapper.m_Engine_TranslateX;
-        public InputAction @TranslateY => m_Wrapper.m_Engine_TranslateY;
-        public InputActionMap Get() { return m_Wrapper.m_Engine; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(EngineActions set) { return set.Get(); }
-        public void AddCallbacks(IEngineActions instance)
-        {
-            if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
-            @TranslateZ.started += instance.OnTranslateZ;
-            @TranslateZ.performed += instance.OnTranslateZ;
-            @TranslateZ.canceled += instance.OnTranslateZ;
-            @TranslateX.started += instance.OnTranslateX;
-            @TranslateX.performed += instance.OnTranslateX;
-            @TranslateX.canceled += instance.OnTranslateX;
-            @TranslateY.started += instance.OnTranslateY;
-            @TranslateY.performed += instance.OnTranslateY;
-            @TranslateY.canceled += instance.OnTranslateY;
-        }
-
-        private void UnregisterCallbacks(IEngineActions instance)
-        {
-            @TranslateZ.started -= instance.OnTranslateZ;
-            @TranslateZ.performed -= instance.OnTranslateZ;
-            @TranslateZ.canceled -= instance.OnTranslateZ;
-            @TranslateX.started -= instance.OnTranslateX;
-            @TranslateX.performed -= instance.OnTranslateX;
-            @TranslateX.canceled -= instance.OnTranslateX;
-            @TranslateY.started -= instance.OnTranslateY;
-            @TranslateY.performed -= instance.OnTranslateY;
-            @TranslateY.canceled -= instance.OnTranslateY;
-        }
-
-        public void RemoveCallbacks(IEngineActions instance)
-        {
-            if (m_Wrapper.m_EngineActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IEngineActions instance)
-        {
-            foreach (var item in m_Wrapper.m_EngineActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_EngineActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
+        void OnTranslateForward(InputAction.CallbackContext context);
+        void OnTranslateBackward(InputAction.CallbackContext context);
     }
-    public EngineActions @Engine => new EngineActions(this);
     public interface ISpacecraftActions
     {
         void OnChangeView(InputAction.CallbackContext context);
         void OnToggleFlashlight(InputAction.CallbackContext context);
-    }
-    public interface IEngineActions
-    {
-        void OnTranslateZ(InputAction.CallbackContext context);
-        void OnTranslateX(InputAction.CallbackContext context);
-        void OnTranslateY(InputAction.CallbackContext context);
     }
 }

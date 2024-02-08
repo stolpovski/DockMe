@@ -15,7 +15,7 @@ namespace DockMe
         CanvasGroup _canvasGroup;
         Vector3 targetPosition;
 
-        private PlayerManager target;
+        private Spacecraft target;
 
         [Tooltip("UI Text to display Player's Name")]
         [SerializeField]
@@ -48,6 +48,11 @@ namespace DockMe
                 playerHealthSlider.value = target.Propellant;
             }
 
+            
+        }
+
+        private void LateUpdate()
+        {
             if (targetRenderer != null)
             {
                 this._canvasGroup.alpha = targetRenderer.isVisible ? 1f : 0f;
@@ -64,7 +69,7 @@ namespace DockMe
 
         #region Public Methods
 
-        public void SetTarget(PlayerManager _target)
+        public void SetTarget(Spacecraft _target)
         {
             if (_target == null)
             {
@@ -73,7 +78,7 @@ namespace DockMe
             }
             // Cache references for efficiency
             target = _target;
-            if (playerNameText != null)
+            if (playerNameText != null && target.photonView.Owner != null)
             {
                 playerNameText.text = target.photonView.Owner.NickName;
             }
