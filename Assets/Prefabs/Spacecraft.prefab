@@ -217,6 +217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5394f1cd75f35468ade740afa1e87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Propellant: {fileID: 0}
+  lookCam: {fileID: 0}
+  PlayerUiPrefab: {fileID: 0}
+  vel: {x: 0, y: 0, z: 0}
 --- !u!114 &4688147864512357353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261deb47baf47bd4793b774182a7744c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Propellant: {fileID: 0}
   _thrusters:
   - {fileID: 4101786931715702778}
   - {fileID: 2728485946551470425}
@@ -237,12 +242,12 @@ MonoBehaviour:
   - {fileID: 1848665616265764426}
   - {fileID: 66645913140396336}
   _positionThrusters:
+    Forward: 00000000
+    Backward: 01000000
     Right: 02000000
     Left: 03000000
     Up: 04000000
     Down: 05000000
-    Forward: 00000000
-    Backward: 01000000
 --- !u!1001 &5222684429959005895
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -53,6 +53,8 @@ MonoBehaviour:
   - UpdateProp
   - RPC_IgniteThrusters
   - RPC_CutoffThrusters
+  - RPC_CutoffThruster
+  - RPC_IgniteThruster
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

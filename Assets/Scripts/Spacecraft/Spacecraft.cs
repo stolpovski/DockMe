@@ -1,20 +1,17 @@
 using Cinemachine;
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DockMe
 {
     public class Spacecraft : MonoBehaviourPunCallbacks, IPunObservable
     {
-        public float Propellant = 1f;
+        public Propellant Propellant;
         public CinemachineFreeLook lookCam;
 
         [SerializeField]
         public GameObject PlayerUiPrefab;
 
-        private Rigidbody rb;
 
 
         [SerializeField]
@@ -25,18 +22,18 @@ namespace DockMe
             if (stream.IsWriting)
             {
                 // We own this player: send the others our data
-                stream.SendNext(Propellant);
+                stream.SendNext(Propellant.Amount);
             }
             else
             {
                 // Network player, receive data
-                this.Propellant = (float)stream.ReceiveNext();
+                Propellant.Amount = (float)stream.ReceiveNext();
             }
         }
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
+            Propellant = GetComponent<Propellant>();
             if (!photonView.IsMine)
             {
                 lookCam.Priority = 0;
@@ -56,25 +53,8 @@ namespace DockMe
             }
         }
 
-        public void UpdatePropellant()
-        {
-            if (photonView.IsMine)
-            {
-                photonView.RPC("UpdateProp", RpcTarget.OthersBuffered, Propellant);
-            }
-        }
 
-        [PunRPC]
-        private void UpdateProp(float prop)
-        {
-            Propellant = prop;
-        }
-
-        private void Update()
-        {
-            vel = rb.velocity;
-        }
-
+        
 
     }
 }

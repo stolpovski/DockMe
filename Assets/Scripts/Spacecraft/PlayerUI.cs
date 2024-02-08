@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-using System.Collections;
 using TMPro;
 
 namespace DockMe
@@ -45,7 +43,7 @@ namespace DockMe
             // Reflect the Player Health
             if (playerHealthSlider != null)
             {
-                playerHealthSlider.value = target.Propellant;
+                playerHealthSlider.value = target.Propellant.Amount;
             }
 
             
@@ -63,6 +61,8 @@ namespace DockMe
                 targetPosition = targetTransform.position;
                 this.transform.position = Camera.main.WorldToScreenPoint(targetPosition);
             }
+
+            
         }
 
         #endregion
@@ -84,7 +84,7 @@ namespace DockMe
             }
 
             targetTransform = this.target.GetComponent<Transform>();
-            targetRenderer = this.target.GetComponent<Renderer>();
+            targetRenderer = this.target.GetComponentInChildren<Renderer>();
             
         }
 

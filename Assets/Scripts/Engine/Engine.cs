@@ -6,6 +6,7 @@ namespace DockMe
 {
     public class Engine : MonoBehaviourPunCallbacks
     {
+        public Propellant Propellant;
         [Serializable]
         public struct PositionThrusters
         {
@@ -21,18 +22,17 @@ namespace DockMe
         [SerializeField] private PositionThrusters _positionThrusters;
 
         private GameInput _input;
-        private Rigidbody rb;
-
-        private Spacecraft craft;
 
         private void Awake()
         {
-            craft = GetComponent<Spacecraft>();
-            rb = GetComponent<Rigidbody>();
+            Propellant = GetComponent<Propellant>();
+            int i = 0;
             foreach (Thruster thruster in _thrusters)
             {
+                thruster.Id = i++;
+                TryGetComponent(out thruster.Engine);
                 TryGetComponent<Rigidbody>(out thruster.Body);
-                TryGetComponent<Spacecraft>(out thruster.Craft);
+                TryGetComponent<Propellant>(out thruster.Propellant);
             }
 
             _input = new GameInput();
@@ -58,7 +58,7 @@ namespace DockMe
 
         private void IgniteThrusters(int[] ids)
         {
-            if (!photonView.IsMine || craft.Propellant < 0)
+            if (!photonView.IsMine || Propellant.IsEmpty)
             {
                 return;
             }
@@ -66,34 +66,35 @@ namespace DockMe
             foreach (int id in ids)
             {
                 _thrusters[id].Ignite();
-                _thrusters[id].IgniteVfx();
-                _thrusters[id].IgniteSfx();
             }
 
-            photonView.RPC("RPC_IgniteThrusters", RpcTarget.Others, ids);
+        }
+
+        public void RpcIgniteVfx(int id)
+        {
+            photonView.RPC("RPC_IgniteThruster", RpcTarget.Others, id);
+        }
+
+        public void RpcCutoffVfx(int id)
+        {
+            photonView.RPC("RPC_CutoffThruster", RpcTarget.Others, id);
         }
 
         [PunRPC]
-        private void RPC_IgniteThrusters(int[] ids)
+        private void RPC_IgniteThruster(int id)
         {
-            foreach (int id in ids)
-            {
-                _thrusters[id].IgniteVfx();
-            }
+            _thrusters[id].IgniteVfx();
         }
 
         [PunRPC]
-        private void RPC_CutoffThrusters(int[] ids)
+        private void RPC_CutoffThruster(int id)
         {
-            foreach (int id in ids)
-            {
-                _thrusters[id].CutoffVfx();
-            }
+            _thrusters[id].CutoffVfx();
         }
 
         private void CutoffThrusters(int[] ids)
         {
-            if (!photonView.IsMine || craft.Propellant < 0)
+            if (!photonView.IsMine || Propellant.IsEmpty)
             {
                 return;
             }
@@ -101,11 +102,9 @@ namespace DockMe
             foreach (int id in ids)
             {
                 _thrusters[id].Cutoff();
-                _thrusters[id].CutoffVfx();
-                _thrusters[id].CutoffSfx();
             }
 
-            photonView.RPC("RPC_CutoffThrusters", RpcTarget.Others, ids);
+        
         }
     }
 }
