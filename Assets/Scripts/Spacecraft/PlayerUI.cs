@@ -84,7 +84,8 @@ namespace DockMe
             }
 
             targetTransform = this.target.GetComponent<Transform>();
-            targetRenderer = this.target.GetComponentInChildren<Renderer>();
+            targetRenderer = this.target.GetComponent<Renderer>();
+            Debug.Log(targetRenderer);
             
         }
 

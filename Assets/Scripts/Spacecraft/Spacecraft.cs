@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DockMe
 {
-    public class Spacecraft : MonoBehaviourPunCallbacks, IPunObservable
+    public class Spacecraft : MonoBehaviourPunCallbacks
     {
         public Propellant Propellant;
         public CinemachineFreeLook lookCam;
@@ -17,19 +17,7 @@ namespace DockMe
         [SerializeField]
         private Vector3 vel;
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                // We own this player: send the others our data
-                stream.SendNext(Propellant.Amount);
-            }
-            else
-            {
-                // Network player, receive data
-                Propellant.Amount = (float)stream.ReceiveNext();
-            }
-        }
+
 
         private void Awake()
         {
