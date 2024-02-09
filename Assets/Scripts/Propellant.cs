@@ -5,12 +5,19 @@ namespace DockMe
 {
     public class Propellant : MonoBehaviour, IPunObservable
     {
-        public float Amount = 1f;
+        public float MaxAmount = 40f;
+        public float Amount;
+        public float RelativeAmount => Amount / MaxAmount;
         public bool IsEmpty => Amount <= 0f;
+
+        private void Awake()
+        {
+            Amount = MaxAmount;
+        }
 
         public void Burn(float amount)
         {
-            Amount -= amount;
+            Amount = Mathf.Clamp(Amount - amount, 0f, MaxAmount);
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

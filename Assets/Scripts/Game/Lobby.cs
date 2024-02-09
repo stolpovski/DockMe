@@ -1,6 +1,8 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DockMe
 {
@@ -18,7 +20,32 @@ namespace DockMe
         [SerializeField]
         private GameObject progressLabel;
 
+        [SerializeField]
+        private Button _playButton;
+
+        private GameInput _gameInput;
+
+        private void Awake()
+        {
+            _gameInput = new GameInput();
+
+
+            _gameInput.UI.Submit.performed += ctx => { if (_playButton.interactable) _playButton.onClick.Invoke(); };
+        }
+
         bool isConnecting;
+
+        override public void OnEnable()
+        {
+            base.OnEnable();
+            _gameInput.UI.Enable();
+        }
+
+        override public void OnDisable()
+        {
+            base.OnDisable();
+            _gameInput.UI.Disable();
+        }
 
         private void Start()
         {
@@ -30,6 +57,7 @@ namespace DockMe
         {
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+            _playButton.interactable = false;
             
             if (PhotonNetwork.IsConnected)
             {
@@ -59,6 +87,7 @@ namespace DockMe
 
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
+            _playButton.interactable = true;
             isConnecting = false;
         }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Globalization;
 
 namespace DockMe
 {
@@ -19,9 +20,13 @@ namespace DockMe
         [SerializeField]
         private TMP_Text playerNameText;
 
+
         [Tooltip("UI Slider to display Player's Health")]
         [SerializeField]
         private Slider playerHealthSlider;
+
+        [SerializeField]
+        private TMP_Text amountText;
 
         #endregion
 
@@ -43,7 +48,8 @@ namespace DockMe
             // Reflect the Player Health
             if (playerHealthSlider != null)
             {
-                playerHealthSlider.value = target.Propellant.Amount;
+                playerHealthSlider.value = target.Propellant.RelativeAmount;
+                amountText.text = target.Propellant.Amount.ToString("F1", CultureInfo.InvariantCulture);
             }
 
             
@@ -85,7 +91,6 @@ namespace DockMe
 
             targetTransform = this.target.GetComponent<Transform>();
             targetRenderer = this.target.GetComponent<Renderer>();
-            Debug.Log(targetRenderer);
             
         }
 

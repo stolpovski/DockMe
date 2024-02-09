@@ -1437,6 +1437,7 @@ MonoBehaviour:
   maxPlayersPerRoom: 4
   controlPanel: {fileID: 1414445946}
   progressLabel: {fileID: 949061265}
+  _playButton: {fileID: 1836417916}
 --- !u!4 &2120284743
 Transform:
   m_ObjectHideFlags: 0

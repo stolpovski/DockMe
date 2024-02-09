@@ -96,6 +96,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "019f33cd-f8ea-4afb-8b65-9457d39d7209",
+            "actions": [
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "733d2f81-0f85-4cc1-9d39-89c6131a0c5d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5ff71ce7-d9c8-4e0f-b356-454c8fcefdd4",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

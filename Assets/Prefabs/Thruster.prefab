@@ -5007,4 +5007,4 @@ MonoBehaviour:
   _vfx: {fileID: 1890446871996000133}
   _sfx: {fileID: 736264455982972453}
   _isRunning: 0
-  _consumption: 0.001
+  _consumption: 0.1

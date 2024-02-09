@@ -15,12 +15,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @GameInput: IInputActionCollection2, IDisposable
+namespace DockMe
 {
-    public InputActionAsset asset { get; }
-    public @GameInput()
+    public partial class @GameInput: IInputActionCollection2, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @GameInput()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""GameInput"",
     ""maps"": [
         {
@@ -118,191 +120,273 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""019f33cd-f8ea-4afb-8b65-9457d39d7209"",
+            ""actions"": [
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""733d2f81-0f85-4cc1-9d39-89c6131a0c5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5ff71ce7-d9c8-4e0f-b356-454c8fcefdd4"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
+            // Engine
+            m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
+            m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
+            m_Engine_TranslateBackward = m_Engine.FindAction("TranslateBackward", throwIfNotFound: true);
+            // Spacecraft
+            m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
+            m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
+            m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
+        public IEnumerable<InputBinding> bindings => asset.bindings;
+
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+        {
+            return asset.FindAction(actionNameOrId, throwIfNotFound);
+        }
+
+        public int FindBinding(InputBinding bindingMask, out InputAction action)
+        {
+            return asset.FindBinding(bindingMask, out action);
+        }
+
         // Engine
-        m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
-        m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
-        m_Engine_TranslateBackward = m_Engine.FindAction("TranslateBackward", throwIfNotFound: true);
+        private readonly InputActionMap m_Engine;
+        private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
+        private readonly InputAction m_Engine_TranslateForward;
+        private readonly InputAction m_Engine_TranslateBackward;
+        public struct EngineActions
+        {
+            private @GameInput m_Wrapper;
+            public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @TranslateForward => m_Wrapper.m_Engine_TranslateForward;
+            public InputAction @TranslateBackward => m_Wrapper.m_Engine_TranslateBackward;
+            public InputActionMap Get() { return m_Wrapper.m_Engine; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(EngineActions set) { return set.Get(); }
+            public void AddCallbacks(IEngineActions instance)
+            {
+                if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
+                @TranslateForward.started += instance.OnTranslateForward;
+                @TranslateForward.performed += instance.OnTranslateForward;
+                @TranslateForward.canceled += instance.OnTranslateForward;
+                @TranslateBackward.started += instance.OnTranslateBackward;
+                @TranslateBackward.performed += instance.OnTranslateBackward;
+                @TranslateBackward.canceled += instance.OnTranslateBackward;
+            }
+
+            private void UnregisterCallbacks(IEngineActions instance)
+            {
+                @TranslateForward.started -= instance.OnTranslateForward;
+                @TranslateForward.performed -= instance.OnTranslateForward;
+                @TranslateForward.canceled -= instance.OnTranslateForward;
+                @TranslateBackward.started -= instance.OnTranslateBackward;
+                @TranslateBackward.performed -= instance.OnTranslateBackward;
+                @TranslateBackward.canceled -= instance.OnTranslateBackward;
+            }
+
+            public void RemoveCallbacks(IEngineActions instance)
+            {
+                if (m_Wrapper.m_EngineActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IEngineActions instance)
+            {
+                foreach (var item in m_Wrapper.m_EngineActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_EngineActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public EngineActions @Engine => new EngineActions(this);
+
         // Spacecraft
-        m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
-        m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
-        m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    public IEnumerable<InputBinding> bindings => asset.bindings;
-
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
-
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
-
-    // Engine
-    private readonly InputActionMap m_Engine;
-    private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
-    private readonly InputAction m_Engine_TranslateForward;
-    private readonly InputAction m_Engine_TranslateBackward;
-    public struct EngineActions
-    {
-        private @GameInput m_Wrapper;
-        public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TranslateForward => m_Wrapper.m_Engine_TranslateForward;
-        public InputAction @TranslateBackward => m_Wrapper.m_Engine_TranslateBackward;
-        public InputActionMap Get() { return m_Wrapper.m_Engine; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(EngineActions set) { return set.Get(); }
-        public void AddCallbacks(IEngineActions instance)
+        private readonly InputActionMap m_Spacecraft;
+        private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
+        private readonly InputAction m_Spacecraft_ChangeView;
+        private readonly InputAction m_Spacecraft_ToggleFlashlight;
+        public struct SpacecraftActions
         {
-            if (instance == null || m_Wrapper.m_EngineActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_EngineActionsCallbackInterfaces.Add(instance);
-            @TranslateForward.started += instance.OnTranslateForward;
-            @TranslateForward.performed += instance.OnTranslateForward;
-            @TranslateForward.canceled += instance.OnTranslateForward;
-            @TranslateBackward.started += instance.OnTranslateBackward;
-            @TranslateBackward.performed += instance.OnTranslateBackward;
-            @TranslateBackward.canceled += instance.OnTranslateBackward;
-        }
+            private @GameInput m_Wrapper;
+            public SpacecraftActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @ChangeView => m_Wrapper.m_Spacecraft_ChangeView;
+            public InputAction @ToggleFlashlight => m_Wrapper.m_Spacecraft_ToggleFlashlight;
+            public InputActionMap Get() { return m_Wrapper.m_Spacecraft; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(SpacecraftActions set) { return set.Get(); }
+            public void AddCallbacks(ISpacecraftActions instance)
+            {
+                if (instance == null || m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Add(instance);
+                @ChangeView.started += instance.OnChangeView;
+                @ChangeView.performed += instance.OnChangeView;
+                @ChangeView.canceled += instance.OnChangeView;
+                @ToggleFlashlight.started += instance.OnToggleFlashlight;
+                @ToggleFlashlight.performed += instance.OnToggleFlashlight;
+                @ToggleFlashlight.canceled += instance.OnToggleFlashlight;
+            }
 
-        private void UnregisterCallbacks(IEngineActions instance)
-        {
-            @TranslateForward.started -= instance.OnTranslateForward;
-            @TranslateForward.performed -= instance.OnTranslateForward;
-            @TranslateForward.canceled -= instance.OnTranslateForward;
-            @TranslateBackward.started -= instance.OnTranslateBackward;
-            @TranslateBackward.performed -= instance.OnTranslateBackward;
-            @TranslateBackward.canceled -= instance.OnTranslateBackward;
-        }
+            private void UnregisterCallbacks(ISpacecraftActions instance)
+            {
+                @ChangeView.started -= instance.OnChangeView;
+                @ChangeView.performed -= instance.OnChangeView;
+                @ChangeView.canceled -= instance.OnChangeView;
+                @ToggleFlashlight.started -= instance.OnToggleFlashlight;
+                @ToggleFlashlight.performed -= instance.OnToggleFlashlight;
+                @ToggleFlashlight.canceled -= instance.OnToggleFlashlight;
+            }
 
-        public void RemoveCallbacks(IEngineActions instance)
-        {
-            if (m_Wrapper.m_EngineActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
+            public void RemoveCallbacks(ISpacecraftActions instance)
+            {
+                if (m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
 
-        public void SetCallbacks(IEngineActions instance)
-        {
-            foreach (var item in m_Wrapper.m_EngineActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_EngineActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
+            public void SetCallbacks(ISpacecraftActions instance)
+            {
+                foreach (var item in m_Wrapper.m_SpacecraftActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
         }
-    }
-    public EngineActions @Engine => new EngineActions(this);
+        public SpacecraftActions @Spacecraft => new SpacecraftActions(this);
 
-    // Spacecraft
-    private readonly InputActionMap m_Spacecraft;
-    private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
-    private readonly InputAction m_Spacecraft_ChangeView;
-    private readonly InputAction m_Spacecraft_ToggleFlashlight;
-    public struct SpacecraftActions
-    {
-        private @GameInput m_Wrapper;
-        public SpacecraftActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChangeView => m_Wrapper.m_Spacecraft_ChangeView;
-        public InputAction @ToggleFlashlight => m_Wrapper.m_Spacecraft_ToggleFlashlight;
-        public InputActionMap Get() { return m_Wrapper.m_Spacecraft; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SpacecraftActions set) { return set.Get(); }
-        public void AddCallbacks(ISpacecraftActions instance)
+        // UI
+        private readonly InputActionMap m_UI;
+        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+        private readonly InputAction m_UI_Submit;
+        public struct UIActions
         {
-            if (instance == null || m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Add(instance);
-            @ChangeView.started += instance.OnChangeView;
-            @ChangeView.performed += instance.OnChangeView;
-            @ChangeView.canceled += instance.OnChangeView;
-            @ToggleFlashlight.started += instance.OnToggleFlashlight;
-            @ToggleFlashlight.performed += instance.OnToggleFlashlight;
-            @ToggleFlashlight.canceled += instance.OnToggleFlashlight;
-        }
+            private @GameInput m_Wrapper;
+            public UIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Submit => m_Wrapper.m_UI_Submit;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void AddCallbacks(IUIActions instance)
+            {
+                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+            }
 
-        private void UnregisterCallbacks(ISpacecraftActions instance)
-        {
-            @ChangeView.started -= instance.OnChangeView;
-            @ChangeView.performed -= instance.OnChangeView;
-            @ChangeView.canceled -= instance.OnChangeView;
-            @ToggleFlashlight.started -= instance.OnToggleFlashlight;
-            @ToggleFlashlight.performed -= instance.OnToggleFlashlight;
-            @ToggleFlashlight.canceled -= instance.OnToggleFlashlight;
-        }
+            private void UnregisterCallbacks(IUIActions instance)
+            {
+                @Submit.started -= instance.OnSubmit;
+                @Submit.performed -= instance.OnSubmit;
+                @Submit.canceled -= instance.OnSubmit;
+            }
 
-        public void RemoveCallbacks(ISpacecraftActions instance)
-        {
-            if (m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
+            public void RemoveCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
 
-        public void SetCallbacks(ISpacecraftActions instance)
-        {
-            foreach (var item in m_Wrapper.m_SpacecraftActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
+            public void SetCallbacks(IUIActions instance)
+            {
+                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
         }
-    }
-    public SpacecraftActions @Spacecraft => new SpacecraftActions(this);
-    public interface IEngineActions
-    {
-        void OnTranslateForward(InputAction.CallbackContext context);
-        void OnTranslateBackward(InputAction.CallbackContext context);
-    }
-    public interface ISpacecraftActions
-    {
-        void OnChangeView(InputAction.CallbackContext context);
-        void OnToggleFlashlight(InputAction.CallbackContext context);
+        public UIActions @UI => new UIActions(this);
+        public interface IEngineActions
+        {
+            void OnTranslateForward(InputAction.CallbackContext context);
+            void OnTranslateBackward(InputAction.CallbackContext context);
+        }
+        public interface ISpacecraftActions
+        {
+            void OnChangeView(InputAction.CallbackContext context);
+            void OnToggleFlashlight(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnSubmit(InputAction.CallbackContext context);
+        }
     }
 }
