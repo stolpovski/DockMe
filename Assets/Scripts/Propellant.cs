@@ -7,6 +7,7 @@ namespace DockMe
     {
         public float MaxAmount = 40f;
         public float Amount;
+        [SerializeField] private bool _isEndless;
         public float RelativeAmount => Amount / MaxAmount;
         public bool IsEmpty => Amount <= 0f;
 
@@ -17,6 +18,10 @@ namespace DockMe
 
         public void Burn(float amount)
         {
+            if (_isEndless)
+            {
+                return;
+            }
             Amount = Mathf.Clamp(Amount - amount, 0f, MaxAmount);
         }
 
