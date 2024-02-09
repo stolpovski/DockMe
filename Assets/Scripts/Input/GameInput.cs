@@ -240,6 +240,15 @@ namespace DockMe
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleTransmit"",
+                    ""type"": ""Button"",
+                    ""id"": ""1056724b-3f00-4a27-b386-4dbed8520ffa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -262,6 +271,17 @@ namespace DockMe
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleFlashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b0fa779-03a9-48df-97da-1c19e7589c7e"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleTransmit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -294,6 +314,34 @@ namespace DockMe
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CapCom"",
+            ""id"": ""14e633ef-d0e7-4076-b8d8-a972685c8ec9"",
+            ""actions"": [
+                {
+                    ""name"": ""Transmit"",
+                    ""type"": ""Button"",
+                    ""id"": ""82dd86f1-03cf-439a-b4d3-8e2755ba34c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cfb51729-4451-4a6a-8055-7322123a88e6"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transmit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -310,9 +358,13 @@ namespace DockMe
             m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
             m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
             m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
+            m_Spacecraft_ToggleTransmit = m_Spacecraft.FindAction("ToggleTransmit", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+            // CapCom
+            m_CapCom = asset.FindActionMap("CapCom", throwIfNotFound: true);
+            m_CapCom_Transmit = m_CapCom.FindAction("Transmit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -462,12 +514,14 @@ namespace DockMe
         private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
         private readonly InputAction m_Spacecraft_ChangeView;
         private readonly InputAction m_Spacecraft_ToggleFlashlight;
+        private readonly InputAction m_Spacecraft_ToggleTransmit;
         public struct SpacecraftActions
         {
             private @GameInput m_Wrapper;
             public SpacecraftActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @ChangeView => m_Wrapper.m_Spacecraft_ChangeView;
             public InputAction @ToggleFlashlight => m_Wrapper.m_Spacecraft_ToggleFlashlight;
+            public InputAction @ToggleTransmit => m_Wrapper.m_Spacecraft_ToggleTransmit;
             public InputActionMap Get() { return m_Wrapper.m_Spacecraft; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -483,6 +537,9 @@ namespace DockMe
                 @ToggleFlashlight.started += instance.OnToggleFlashlight;
                 @ToggleFlashlight.performed += instance.OnToggleFlashlight;
                 @ToggleFlashlight.canceled += instance.OnToggleFlashlight;
+                @ToggleTransmit.started += instance.OnToggleTransmit;
+                @ToggleTransmit.performed += instance.OnToggleTransmit;
+                @ToggleTransmit.canceled += instance.OnToggleTransmit;
             }
 
             private void UnregisterCallbacks(ISpacecraftActions instance)
@@ -493,6 +550,9 @@ namespace DockMe
                 @ToggleFlashlight.started -= instance.OnToggleFlashlight;
                 @ToggleFlashlight.performed -= instance.OnToggleFlashlight;
                 @ToggleFlashlight.canceled -= instance.OnToggleFlashlight;
+                @ToggleTransmit.started -= instance.OnToggleTransmit;
+                @ToggleTransmit.performed -= instance.OnToggleTransmit;
+                @ToggleTransmit.canceled -= instance.OnToggleTransmit;
             }
 
             public void RemoveCallbacks(ISpacecraftActions instance)
@@ -556,6 +616,52 @@ namespace DockMe
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // CapCom
+        private readonly InputActionMap m_CapCom;
+        private List<ICapComActions> m_CapComActionsCallbackInterfaces = new List<ICapComActions>();
+        private readonly InputAction m_CapCom_Transmit;
+        public struct CapComActions
+        {
+            private @GameInput m_Wrapper;
+            public CapComActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Transmit => m_Wrapper.m_CapCom_Transmit;
+            public InputActionMap Get() { return m_Wrapper.m_CapCom; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CapComActions set) { return set.Get(); }
+            public void AddCallbacks(ICapComActions instance)
+            {
+                if (instance == null || m_Wrapper.m_CapComActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_CapComActionsCallbackInterfaces.Add(instance);
+                @Transmit.started += instance.OnTransmit;
+                @Transmit.performed += instance.OnTransmit;
+                @Transmit.canceled += instance.OnTransmit;
+            }
+
+            private void UnregisterCallbacks(ICapComActions instance)
+            {
+                @Transmit.started -= instance.OnTransmit;
+                @Transmit.performed -= instance.OnTransmit;
+                @Transmit.canceled -= instance.OnTransmit;
+            }
+
+            public void RemoveCallbacks(ICapComActions instance)
+            {
+                if (m_Wrapper.m_CapComActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ICapComActions instance)
+            {
+                foreach (var item in m_Wrapper.m_CapComActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_CapComActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public CapComActions @CapCom => new CapComActions(this);
         public interface IEngineActions
         {
             void OnTranslateForward(InputAction.CallbackContext context);
@@ -569,10 +675,15 @@ namespace DockMe
         {
             void OnChangeView(InputAction.CallbackContext context);
             void OnToggleFlashlight(InputAction.CallbackContext context);
+            void OnToggleTransmit(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
             void OnSubmit(InputAction.CallbackContext context);
+        }
+        public interface ICapComActions
+        {
+            void OnTransmit(InputAction.CallbackContext context);
         }
     }
 }

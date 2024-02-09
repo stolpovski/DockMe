@@ -216,6 +216,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleTransmit",
+                    "type": "Button",
+                    "id": "1056724b-3f00-4a27-b386-4dbed8520ffa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -238,6 +247,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleFlashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b0fa779-03a9-48df-97da-1c19e7589c7e",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleTransmit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -266,6 +286,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "CapCom",
+            "id": "14e633ef-d0e7-4076-b8d8-a972685c8ec9",
+            "actions": [
+                {
+                    "name": "Transmit",
+                    "type": "Button",
+                    "id": "82dd86f1-03cf-439a-b4d3-8e2755ba34c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cfb51729-4451-4a6a-8055-7322123a88e6",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Transmit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

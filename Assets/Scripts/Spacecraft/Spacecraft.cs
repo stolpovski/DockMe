@@ -1,12 +1,16 @@
 using Cinemachine;
 using Photon.Pun;
+using System;
 using UnityEngine;
 
 namespace DockMe
 {
     public class Spacecraft : MonoBehaviourPunCallbacks
     {
+        [NonSerialized]
         public Propellant Propellant;
+
+
         public CinemachineFreeLook lookCam;
 
         [SerializeField]
@@ -19,6 +23,7 @@ namespace DockMe
 
 
 
+
         private void Awake()
         {
             Propellant = GetComponent<Propellant>();
@@ -26,6 +31,8 @@ namespace DockMe
             {
                 lookCam.Priority = 0;
             }
+
+           
         }
 
         private void Start()

@@ -6,7 +6,8 @@ namespace DockMe
 {
     public class Engine : MonoBehaviourPunCallbacks
     {
-        public Propellant Propellant;
+        private Propellant _propellant;
+        
         [Serializable]
         public struct PositionThrusters
         {
@@ -25,7 +26,7 @@ namespace DockMe
 
         private void Awake()
         {
-            Propellant = GetComponent<Propellant>();
+            _propellant = GetComponent<Propellant>();
             int i = 0;
             foreach (Thruster thruster in _thrusters)
             {
@@ -53,19 +54,21 @@ namespace DockMe
             _input.Engine.TranslateDown.canceled += context => CutoffThrusters(_positionThrusters.Down);
         }
 
-        override public void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             _input.Engine.Enable();
         }
 
-        override public void OnDisable()
+        public override void OnDisable()
         {
+            base.OnDisable();
             _input.Engine.Disable();
         }
 
         private void IgniteThrusters(int[] ids)
         {
-            if (!photonView.IsMine || Propellant.IsEmpty)
+            if (!photonView.IsMine || _propellant.IsEmpty)
             {
                 return;
             }
@@ -101,7 +104,7 @@ namespace DockMe
 
         private void CutoffThrusters(int[] ids)
         {
-            if (!photonView.IsMine || Propellant.IsEmpty)
+            if (!photonView.IsMine || _propellant.IsEmpty)
             {
                 return;
             }

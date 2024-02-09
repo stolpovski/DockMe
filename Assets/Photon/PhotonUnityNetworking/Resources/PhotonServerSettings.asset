@@ -55,6 +55,8 @@ MonoBehaviour:
   - RPC_CutoffThrusters
   - RPC_CutoffThruster
   - RPC_IgniteThruster
+  - PlayIntroTone
+  - PlayOutroTone
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
