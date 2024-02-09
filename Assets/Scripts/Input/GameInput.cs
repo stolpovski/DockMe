@@ -46,6 +46,42 @@ namespace DockMe
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""2976bb0d-88a6-4cef-9b87-783f4bc978a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c086c3a7-2334-47e1-b1f6-3687077837bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""97647e69-cb02-4aa3-8241-a871c36f762c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TranslateDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcef54d3-2d17-4c1b-830a-05816ed0d5ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +104,50 @@ namespace DockMe
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TranslateBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cee09511-6509-4ee7-9694-b5f098fe3a9e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e20fc7e0-157e-4737-b8b4-89af81fc7910"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c835072-ce36-48ac-87e7-343399b2c800"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de945165-92a8-4d42-8a98-cbf2ef6d2ba2"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TranslateDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -156,6 +236,10 @@ namespace DockMe
             m_Engine = asset.FindActionMap("Engine", throwIfNotFound: true);
             m_Engine_TranslateForward = m_Engine.FindAction("TranslateForward", throwIfNotFound: true);
             m_Engine_TranslateBackward = m_Engine.FindAction("TranslateBackward", throwIfNotFound: true);
+            m_Engine_TranslateRight = m_Engine.FindAction("TranslateRight", throwIfNotFound: true);
+            m_Engine_TranslateLeft = m_Engine.FindAction("TranslateLeft", throwIfNotFound: true);
+            m_Engine_TranslateUp = m_Engine.FindAction("TranslateUp", throwIfNotFound: true);
+            m_Engine_TranslateDown = m_Engine.FindAction("TranslateDown", throwIfNotFound: true);
             // Spacecraft
             m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
             m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
@@ -226,12 +310,20 @@ namespace DockMe
         private List<IEngineActions> m_EngineActionsCallbackInterfaces = new List<IEngineActions>();
         private readonly InputAction m_Engine_TranslateForward;
         private readonly InputAction m_Engine_TranslateBackward;
+        private readonly InputAction m_Engine_TranslateRight;
+        private readonly InputAction m_Engine_TranslateLeft;
+        private readonly InputAction m_Engine_TranslateUp;
+        private readonly InputAction m_Engine_TranslateDown;
         public struct EngineActions
         {
             private @GameInput m_Wrapper;
             public EngineActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @TranslateForward => m_Wrapper.m_Engine_TranslateForward;
             public InputAction @TranslateBackward => m_Wrapper.m_Engine_TranslateBackward;
+            public InputAction @TranslateRight => m_Wrapper.m_Engine_TranslateRight;
+            public InputAction @TranslateLeft => m_Wrapper.m_Engine_TranslateLeft;
+            public InputAction @TranslateUp => m_Wrapper.m_Engine_TranslateUp;
+            public InputAction @TranslateDown => m_Wrapper.m_Engine_TranslateDown;
             public InputActionMap Get() { return m_Wrapper.m_Engine; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -247,6 +339,18 @@ namespace DockMe
                 @TranslateBackward.started += instance.OnTranslateBackward;
                 @TranslateBackward.performed += instance.OnTranslateBackward;
                 @TranslateBackward.canceled += instance.OnTranslateBackward;
+                @TranslateRight.started += instance.OnTranslateRight;
+                @TranslateRight.performed += instance.OnTranslateRight;
+                @TranslateRight.canceled += instance.OnTranslateRight;
+                @TranslateLeft.started += instance.OnTranslateLeft;
+                @TranslateLeft.performed += instance.OnTranslateLeft;
+                @TranslateLeft.canceled += instance.OnTranslateLeft;
+                @TranslateUp.started += instance.OnTranslateUp;
+                @TranslateUp.performed += instance.OnTranslateUp;
+                @TranslateUp.canceled += instance.OnTranslateUp;
+                @TranslateDown.started += instance.OnTranslateDown;
+                @TranslateDown.performed += instance.OnTranslateDown;
+                @TranslateDown.canceled += instance.OnTranslateDown;
             }
 
             private void UnregisterCallbacks(IEngineActions instance)
@@ -257,6 +361,18 @@ namespace DockMe
                 @TranslateBackward.started -= instance.OnTranslateBackward;
                 @TranslateBackward.performed -= instance.OnTranslateBackward;
                 @TranslateBackward.canceled -= instance.OnTranslateBackward;
+                @TranslateRight.started -= instance.OnTranslateRight;
+                @TranslateRight.performed -= instance.OnTranslateRight;
+                @TranslateRight.canceled -= instance.OnTranslateRight;
+                @TranslateLeft.started -= instance.OnTranslateLeft;
+                @TranslateLeft.performed -= instance.OnTranslateLeft;
+                @TranslateLeft.canceled -= instance.OnTranslateLeft;
+                @TranslateUp.started -= instance.OnTranslateUp;
+                @TranslateUp.performed -= instance.OnTranslateUp;
+                @TranslateUp.canceled -= instance.OnTranslateUp;
+                @TranslateDown.started -= instance.OnTranslateDown;
+                @TranslateDown.performed -= instance.OnTranslateDown;
+                @TranslateDown.canceled -= instance.OnTranslateDown;
             }
 
             public void RemoveCallbacks(IEngineActions instance)
@@ -378,6 +494,10 @@ namespace DockMe
         {
             void OnTranslateForward(InputAction.CallbackContext context);
             void OnTranslateBackward(InputAction.CallbackContext context);
+            void OnTranslateRight(InputAction.CallbackContext context);
+            void OnTranslateLeft(InputAction.CallbackContext context);
+            void OnTranslateUp(InputAction.CallbackContext context);
+            void OnTranslateDown(InputAction.CallbackContext context);
         }
         public interface ISpacecraftActions
         {

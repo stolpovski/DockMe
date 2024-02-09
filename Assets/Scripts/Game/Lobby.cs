@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,8 @@ namespace DockMe
         private Button _playButton;
 
         private GameInput _gameInput;
+
+        [SerializeField] private TMP_Text _errorText;
 
         private void Awake()
         {
@@ -84,6 +87,7 @@ namespace DockMe
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
+            _errorText.SetText(cause.ToString());
 
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);

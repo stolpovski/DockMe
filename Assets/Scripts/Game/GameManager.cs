@@ -13,13 +13,14 @@ namespace DockMe
     public class GameManager : MonoBehaviourPunCallbacks
     {
         public GameObject playerPrefab;
+        public bool IsRotate;
 
 
         #region Photon Callbacks
 
         private void Start()
         {
-            PhotonNetwork.Instantiate(this.playerPrefab.name, Randomizer.Position(10), Randomizer.Rotation(45), 0);
+            PhotonNetwork.Instantiate(this.playerPrefab.name, Randomizer.Position(10), IsRotate ? Randomizer.Rotation(45) : Quaternion.identity, 0);
 
             
 

@@ -39,11 +39,18 @@ namespace DockMe
 
             _input.Engine.TranslateForward.performed += context => IgniteThrusters(_positionThrusters.Forward);
             _input.Engine.TranslateForward.canceled += context => CutoffThrusters(_positionThrusters.Forward);
-
             _input.Engine.TranslateBackward.performed += context => IgniteThrusters(_positionThrusters.Backward);
             _input.Engine.TranslateBackward.canceled += context => CutoffThrusters(_positionThrusters.Backward);
 
-            
+            _input.Engine.TranslateRight.performed += context => IgniteThrusters(_positionThrusters.Right);
+            _input.Engine.TranslateRight.canceled += context => CutoffThrusters(_positionThrusters.Right);
+            _input.Engine.TranslateLeft.performed += context => IgniteThrusters(_positionThrusters.Left);
+            _input.Engine.TranslateLeft.canceled += context => CutoffThrusters(_positionThrusters.Left);
+
+            _input.Engine.TranslateUp.performed += context => IgniteThrusters(_positionThrusters.Up);
+            _input.Engine.TranslateUp.canceled += context => CutoffThrusters(_positionThrusters.Up);
+            _input.Engine.TranslateDown.performed += context => IgniteThrusters(_positionThrusters.Down);
+            _input.Engine.TranslateDown.canceled += context => CutoffThrusters(_positionThrusters.Down);
         }
 
         override public void OnEnable()
