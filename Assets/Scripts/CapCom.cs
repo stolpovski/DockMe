@@ -17,37 +17,39 @@ namespace DockMe
             _recorder = GameObject.Find("MissionControl").GetComponent<Recorder>();
 
             _gameInput = new GameInput();
-            _gameInput.CapCom.Transmit.performed += context => EnableTransmit();
-            _gameInput.CapCom.Transmit.canceled += context => DisableTransmit();
+            _gameInput.Transponder.Transmit.performed += context => OnStartTransmit();
+            _gameInput.Transponder.Transmit.canceled += context => OnStopTransmit();
         }
 
         public override void OnEnable()
         {
             base.OnEnable();
-            _gameInput.CapCom.Enable();
+            _gameInput.Transponder.Enable();
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            _gameInput.CapCom.Disable();
+            _gameInput.Transponder.Disable();
         }
 
-        private void EnableTransmit()
+        private void OnStartTransmit()
         {
-            PlayIntroTone();
+            //if (_missionControl.IsTransmitting) return;
+            StartTransmit();
             
             if (photonView.IsMine)
             {
-                photonView.RPC("PlayIntroTone", RpcTarget.Others);
+                photonView.RPC("StartTransmit", RpcTarget.Others);
             }
             
             _recorder.TransmitEnabled = true;
+            //_missionControl.StartTransmit();
         }
 
-        private void DisableTransmit()
+        private void OnStopTransmit()
         {
-            PlayOutroTone();
+            StopTransmit();
             
             if (photonView.IsMine)
             {
@@ -58,14 +60,15 @@ namespace DockMe
         }
 
         [PunRPC]
-        private void PlayIntroTone()
+        private void StartTransmit()
         {
             _outroTone.Stop();
             _introTone.Play();
+            //_missionControl.StartTransmit();
         }
 
         [PunRPC]
-        private void PlayOutroTone()
+        private void StopTransmit()
         {
             _introTone.Stop();
             _outroTone.Play();

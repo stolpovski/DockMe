@@ -316,7 +316,7 @@ namespace DockMe
             ]
         },
         {
-            ""name"": ""CapCom"",
+            ""name"": ""Transponder"",
             ""id"": ""14e633ef-d0e7-4076-b8d8-a972685c8ec9"",
             ""actions"": [
                 {
@@ -362,9 +362,9 @@ namespace DockMe
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-            // CapCom
-            m_CapCom = asset.FindActionMap("CapCom", throwIfNotFound: true);
-            m_CapCom_Transmit = m_CapCom.FindAction("Transmit", throwIfNotFound: true);
+            // Transponder
+            m_Transponder = asset.FindActionMap("Transponder", throwIfNotFound: true);
+            m_Transponder_Transmit = m_Transponder.FindAction("Transmit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -617,51 +617,51 @@ namespace DockMe
         }
         public UIActions @UI => new UIActions(this);
 
-        // CapCom
-        private readonly InputActionMap m_CapCom;
-        private List<ICapComActions> m_CapComActionsCallbackInterfaces = new List<ICapComActions>();
-        private readonly InputAction m_CapCom_Transmit;
-        public struct CapComActions
+        // Transponder
+        private readonly InputActionMap m_Transponder;
+        private List<ITransponderActions> m_TransponderActionsCallbackInterfaces = new List<ITransponderActions>();
+        private readonly InputAction m_Transponder_Transmit;
+        public struct TransponderActions
         {
             private @GameInput m_Wrapper;
-            public CapComActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Transmit => m_Wrapper.m_CapCom_Transmit;
-            public InputActionMap Get() { return m_Wrapper.m_CapCom; }
+            public TransponderActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Transmit => m_Wrapper.m_Transponder_Transmit;
+            public InputActionMap Get() { return m_Wrapper.m_Transponder; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(CapComActions set) { return set.Get(); }
-            public void AddCallbacks(ICapComActions instance)
+            public static implicit operator InputActionMap(TransponderActions set) { return set.Get(); }
+            public void AddCallbacks(ITransponderActions instance)
             {
-                if (instance == null || m_Wrapper.m_CapComActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_CapComActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_TransponderActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_TransponderActionsCallbackInterfaces.Add(instance);
                 @Transmit.started += instance.OnTransmit;
                 @Transmit.performed += instance.OnTransmit;
                 @Transmit.canceled += instance.OnTransmit;
             }
 
-            private void UnregisterCallbacks(ICapComActions instance)
+            private void UnregisterCallbacks(ITransponderActions instance)
             {
                 @Transmit.started -= instance.OnTransmit;
                 @Transmit.performed -= instance.OnTransmit;
                 @Transmit.canceled -= instance.OnTransmit;
             }
 
-            public void RemoveCallbacks(ICapComActions instance)
+            public void RemoveCallbacks(ITransponderActions instance)
             {
-                if (m_Wrapper.m_CapComActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_TransponderActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ICapComActions instance)
+            public void SetCallbacks(ITransponderActions instance)
             {
-                foreach (var item in m_Wrapper.m_CapComActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_TransponderActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_CapComActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_TransponderActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public CapComActions @CapCom => new CapComActions(this);
+        public TransponderActions @Transponder => new TransponderActions(this);
         public interface IEngineActions
         {
             void OnTranslateForward(InputAction.CallbackContext context);
@@ -681,7 +681,7 @@ namespace DockMe
         {
             void OnSubmit(InputAction.CallbackContext context);
         }
-        public interface ICapComActions
+        public interface ITransponderActions
         {
             void OnTransmit(InputAction.CallbackContext context);
         }

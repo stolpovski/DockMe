@@ -37,14 +37,10 @@ namespace DockMe
 
         private void Start()
         {
-            if (PlayerUiPrefab != null)
+            if (!photonView.IsMine && PlayerUiPrefab != null)
             {
                 GameObject _uiGo = Instantiate(PlayerUiPrefab);
                 _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-            }
-            else
-            {
-                Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
             }
         }
 
