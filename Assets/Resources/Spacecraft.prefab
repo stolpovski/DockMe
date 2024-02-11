@@ -623,6 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookCam: {fileID: 5556398187771139249}
   PlayerUiPrefab: {fileID: 6381816467167184613, guid: 365eec3e4b7dc634aacc0e00b43ab338, type: 3}
+  _hudPrefab: {fileID: 2106046720947258044, guid: 497a7d34dba104c41bdd2ca18d1cced9, type: 3}
   vel: {x: 0, y: 0, z: 0}
 --- !u!114 &1227191738547607841
 MonoBehaviour:
@@ -1070,7 +1071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6284653705682387820}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018189492, y: -0.000000011719908, z: -2.1321438e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189488, y: -0.000000017203536, z: -3.1297526e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

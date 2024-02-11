@@ -16,16 +16,23 @@ namespace DockMe
         [SerializeField]
         public GameObject PlayerUiPrefab;
 
+        [SerializeField]
+        private GameObject _hudPrefab;
+
 
 
         [SerializeField]
         private Vector3 vel;
 
+        private Rigidbody _rigidbody;
+
+        public float Rate => _rigidbody.velocity.magnitude;
 
 
 
         private void Awake()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             Propellant = GetComponent<Propellant>();
             if (!photonView.IsMine)
             {
@@ -41,6 +48,13 @@ namespace DockMe
             {
                 GameObject _uiGo = Instantiate(PlayerUiPrefab);
                 _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+            }
+
+            if (photonView.IsMine && _hudPrefab != null)
+            {
+                GameObject _hudGo = Instantiate(_hudPrefab);
+                _hudGo.SendMessage("SetSpacecraft", this, SendMessageOptions.RequireReceiver);
+
             }
         }
 
