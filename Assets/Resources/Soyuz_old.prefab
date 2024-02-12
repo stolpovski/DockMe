@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 8513790745506178566}
   - component: {fileID: 8359264321722246246}
   m_Layer: 0
-  m_Name: Soyuz_
+  m_Name: Soyuz_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
