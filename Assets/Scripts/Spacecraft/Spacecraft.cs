@@ -27,6 +27,11 @@ namespace DockMe
         private Rigidbody _rigidbody;
 
         public float Rate => _rigidbody.velocity.magnitude;
+        public float Range => Vector3.Distance(transform.position, Vector3.zero);
+
+        public Vector3 DeltaAngle => transform.localEulerAngles;
+
+        public Vector3 AngularVelocity => _rigidbody.angularVelocity;
 
 
 
