@@ -19,8 +19,20 @@ namespace DockMe
             public int[] Down;
         }
 
+        [Serializable]
+        public struct RotationThrusters
+        {
+            public int[] PitchUp;
+            public int[] PitchDown;
+            public int[] YawRight;
+            public int[] YawLeft;
+            public int[] RollRight;
+            public int[] RollLeft;
+        }
+
         [SerializeField] private Thruster[] _thrusters;
         [SerializeField] private PositionThrusters _positionThrusters;
+        [SerializeField] private RotationThrusters _rotationThrusters;
 
         private GameInput _input;
 
@@ -52,6 +64,21 @@ namespace DockMe
             _input.Engine.TranslateUp.canceled += context => CutoffThrusters(_positionThrusters.Up);
             _input.Engine.TranslateDown.performed += context => IgniteThrusters(_positionThrusters.Down);
             _input.Engine.TranslateDown.canceled += context => CutoffThrusters(_positionThrusters.Down);
+
+            _input.Engine.PitchUp.performed += context => IgniteThrusters(_rotationThrusters.PitchUp);
+            _input.Engine.PitchUp.canceled += context => CutoffThrusters(_rotationThrusters.PitchUp);
+            _input.Engine.PitchDown.performed += context => IgniteThrusters(_rotationThrusters.PitchDown);
+            _input.Engine.PitchDown.canceled += context => CutoffThrusters(_rotationThrusters.PitchDown);
+
+            _input.Engine.YawRight.performed += context => IgniteThrusters(_rotationThrusters.YawRight);
+            _input.Engine.YawRight.canceled += context => CutoffThrusters(_rotationThrusters.YawRight);
+            _input.Engine.YawLeft.performed += context => IgniteThrusters(_rotationThrusters.YawLeft);
+            _input.Engine.YawLeft.canceled += context => CutoffThrusters(_rotationThrusters.YawLeft);
+
+            _input.Engine.RollRight.performed += context => IgniteThrusters(_rotationThrusters.RollRight);
+            _input.Engine.RollRight.canceled += context => CutoffThrusters(_rotationThrusters.RollRight);
+            _input.Engine.RollLeft.performed += context => IgniteThrusters(_rotationThrusters.RollLeft);
+            _input.Engine.RollLeft.canceled += context => CutoffThrusters(_rotationThrusters.RollLeft);
         }
 
         public override void OnEnable()

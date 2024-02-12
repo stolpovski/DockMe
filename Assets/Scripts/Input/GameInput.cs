@@ -82,6 +82,60 @@ namespace DockMe
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PitchUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""34c00c57-256d-43ce-a882-1b97e6be173f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PitchDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a13989e-afc2-406a-a111-38ebdacc8e6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""YawRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""70d0a8af-7d0d-4607-89ab-b8453e21b31e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""YawLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""742a5ac7-8e39-4370-a914-8c0963c16f30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RollRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""edea60b3-39fd-4966-b240-62655f93733a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RollLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d008597-cf4a-4a5d-a07d-0e34ed0b88bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +268,72 @@ namespace DockMe
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TranslateDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f890b8b3-07a1-4449-9508-3f0a616099a0"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51563525-2989-4507-8014-8a0d49439d69"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PitchDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7292a72b-3309-4b54-a35b-8aca283e84ce"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""YawRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f16be3da-b935-4267-a970-37bfbe826935"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""YawLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""270c2a3e-ddc5-40be-b33f-5700c878ab0d"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb5ffc3f-6897-4ff8-a0a5-45e736b66271"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RollLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -354,6 +474,12 @@ namespace DockMe
             m_Engine_TranslateLeft = m_Engine.FindAction("TranslateLeft", throwIfNotFound: true);
             m_Engine_TranslateUp = m_Engine.FindAction("TranslateUp", throwIfNotFound: true);
             m_Engine_TranslateDown = m_Engine.FindAction("TranslateDown", throwIfNotFound: true);
+            m_Engine_PitchUp = m_Engine.FindAction("PitchUp", throwIfNotFound: true);
+            m_Engine_PitchDown = m_Engine.FindAction("PitchDown", throwIfNotFound: true);
+            m_Engine_YawRight = m_Engine.FindAction("YawRight", throwIfNotFound: true);
+            m_Engine_YawLeft = m_Engine.FindAction("YawLeft", throwIfNotFound: true);
+            m_Engine_RollRight = m_Engine.FindAction("RollRight", throwIfNotFound: true);
+            m_Engine_RollLeft = m_Engine.FindAction("RollLeft", throwIfNotFound: true);
             // Spacecraft
             m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
             m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
@@ -432,6 +558,12 @@ namespace DockMe
         private readonly InputAction m_Engine_TranslateLeft;
         private readonly InputAction m_Engine_TranslateUp;
         private readonly InputAction m_Engine_TranslateDown;
+        private readonly InputAction m_Engine_PitchUp;
+        private readonly InputAction m_Engine_PitchDown;
+        private readonly InputAction m_Engine_YawRight;
+        private readonly InputAction m_Engine_YawLeft;
+        private readonly InputAction m_Engine_RollRight;
+        private readonly InputAction m_Engine_RollLeft;
         public struct EngineActions
         {
             private @GameInput m_Wrapper;
@@ -442,6 +574,12 @@ namespace DockMe
             public InputAction @TranslateLeft => m_Wrapper.m_Engine_TranslateLeft;
             public InputAction @TranslateUp => m_Wrapper.m_Engine_TranslateUp;
             public InputAction @TranslateDown => m_Wrapper.m_Engine_TranslateDown;
+            public InputAction @PitchUp => m_Wrapper.m_Engine_PitchUp;
+            public InputAction @PitchDown => m_Wrapper.m_Engine_PitchDown;
+            public InputAction @YawRight => m_Wrapper.m_Engine_YawRight;
+            public InputAction @YawLeft => m_Wrapper.m_Engine_YawLeft;
+            public InputAction @RollRight => m_Wrapper.m_Engine_RollRight;
+            public InputAction @RollLeft => m_Wrapper.m_Engine_RollLeft;
             public InputActionMap Get() { return m_Wrapper.m_Engine; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -469,6 +607,24 @@ namespace DockMe
                 @TranslateDown.started += instance.OnTranslateDown;
                 @TranslateDown.performed += instance.OnTranslateDown;
                 @TranslateDown.canceled += instance.OnTranslateDown;
+                @PitchUp.started += instance.OnPitchUp;
+                @PitchUp.performed += instance.OnPitchUp;
+                @PitchUp.canceled += instance.OnPitchUp;
+                @PitchDown.started += instance.OnPitchDown;
+                @PitchDown.performed += instance.OnPitchDown;
+                @PitchDown.canceled += instance.OnPitchDown;
+                @YawRight.started += instance.OnYawRight;
+                @YawRight.performed += instance.OnYawRight;
+                @YawRight.canceled += instance.OnYawRight;
+                @YawLeft.started += instance.OnYawLeft;
+                @YawLeft.performed += instance.OnYawLeft;
+                @YawLeft.canceled += instance.OnYawLeft;
+                @RollRight.started += instance.OnRollRight;
+                @RollRight.performed += instance.OnRollRight;
+                @RollRight.canceled += instance.OnRollRight;
+                @RollLeft.started += instance.OnRollLeft;
+                @RollLeft.performed += instance.OnRollLeft;
+                @RollLeft.canceled += instance.OnRollLeft;
             }
 
             private void UnregisterCallbacks(IEngineActions instance)
@@ -491,6 +647,24 @@ namespace DockMe
                 @TranslateDown.started -= instance.OnTranslateDown;
                 @TranslateDown.performed -= instance.OnTranslateDown;
                 @TranslateDown.canceled -= instance.OnTranslateDown;
+                @PitchUp.started -= instance.OnPitchUp;
+                @PitchUp.performed -= instance.OnPitchUp;
+                @PitchUp.canceled -= instance.OnPitchUp;
+                @PitchDown.started -= instance.OnPitchDown;
+                @PitchDown.performed -= instance.OnPitchDown;
+                @PitchDown.canceled -= instance.OnPitchDown;
+                @YawRight.started -= instance.OnYawRight;
+                @YawRight.performed -= instance.OnYawRight;
+                @YawRight.canceled -= instance.OnYawRight;
+                @YawLeft.started -= instance.OnYawLeft;
+                @YawLeft.performed -= instance.OnYawLeft;
+                @YawLeft.canceled -= instance.OnYawLeft;
+                @RollRight.started -= instance.OnRollRight;
+                @RollRight.performed -= instance.OnRollRight;
+                @RollRight.canceled -= instance.OnRollRight;
+                @RollLeft.started -= instance.OnRollLeft;
+                @RollLeft.performed -= instance.OnRollLeft;
+                @RollLeft.canceled -= instance.OnRollLeft;
             }
 
             public void RemoveCallbacks(IEngineActions instance)
@@ -670,6 +844,12 @@ namespace DockMe
             void OnTranslateLeft(InputAction.CallbackContext context);
             void OnTranslateUp(InputAction.CallbackContext context);
             void OnTranslateDown(InputAction.CallbackContext context);
+            void OnPitchUp(InputAction.CallbackContext context);
+            void OnPitchDown(InputAction.CallbackContext context);
+            void OnYawRight(InputAction.CallbackContext context);
+            void OnYawLeft(InputAction.CallbackContext context);
+            void OnRollRight(InputAction.CallbackContext context);
+            void OnRollLeft(InputAction.CallbackContext context);
         }
         public interface ISpacecraftActions
         {

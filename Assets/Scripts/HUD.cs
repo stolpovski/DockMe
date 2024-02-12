@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -9,6 +7,8 @@ namespace DockMe
 {
     public class HUD : MonoBehaviour
     {
+        const float RadianDegrees = 57.2958f;
+
         [SerializeField]
         private TMP_Text _fuelRateRange;
 
@@ -17,6 +17,12 @@ namespace DockMe
 
         [SerializeField]
         private TMP_Text _angularVelocity;
+
+        [SerializeField]
+        private TMP_Text _range;
+
+        [SerializeField]
+        private TMP_Text _velocity;
 
         private Spacecraft _spacecraft;
 
@@ -46,14 +52,26 @@ namespace DockMe
             _angularVelocity.text = String.Format(
                 CultureInfo.InvariantCulture,
                 "{0:F1}\n{1:F1}\n{2:F1}",
-                _spacecraft.AngularVelocity.x * 57.2958,
-                _spacecraft.AngularVelocity.y * 57.2958,
-                _spacecraft.AngularVelocity.z * 57.2958
+                _spacecraft.AngularVelocity.x * RadianDegrees,
+                _spacecraft.AngularVelocity.y * RadianDegrees,
+                _spacecraft.AngularVelocity.z * RadianDegrees
             );
 
+            _range.text = String.Format(
+                CultureInfo.InvariantCulture,
+                "{0:F1}\n{1:F1}\n{2:F1}",
+                _spacecraft.Position.x,
+                _spacecraft.Position.y,
+                _spacecraft.Position.z
+            );
 
-
-
+            _velocity.text = String.Format(
+                CultureInfo.InvariantCulture,
+                "{0:F1}\n{1:F1}\n{2:F1}",
+                _spacecraft.Velocity.x,
+                _spacecraft.Velocity.y,
+                _spacecraft.Velocity.z
+            );
 
         }
 

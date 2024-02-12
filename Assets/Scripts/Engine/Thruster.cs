@@ -61,7 +61,7 @@ namespace DockMe
                     Cutoff();
                 }
                 
-                Body.AddForceAtPosition(transform.rotation * Vector3.forward * _force, transform.position, ForceMode.Impulse);
+                Body.AddForceAtPosition(transform.rotation * Vector3.back * _force, transform.position, ForceMode.Impulse);
                 Propellant.Burn(_consumption);
                 
             }

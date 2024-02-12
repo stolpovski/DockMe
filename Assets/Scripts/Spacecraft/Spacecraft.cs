@@ -33,6 +33,9 @@ namespace DockMe
 
         public Vector3 AngularVelocity => _rigidbody.angularVelocity;
 
+        public Vector3 Position => transform.position;
+        public Vector3 Velocity => _rigidbody.velocity;
+
 
 
         private void Awake()
