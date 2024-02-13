@@ -67,7 +67,7 @@ namespace DockMe
 
             _velocity.text = String.Format(
                 CultureInfo.InvariantCulture,
-                "{0:F1}\n{1:F1}\n{2:F1}",
+                "{0:F1}\n{1:F1}\n{2:F2}",
                 _spacecraft.Velocity.x,
                 _spacecraft.Velocity.y,
                 _spacecraft.Velocity.z
