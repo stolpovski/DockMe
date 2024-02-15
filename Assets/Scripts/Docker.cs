@@ -12,6 +12,13 @@ namespace DockMe
         {
             Debug.Log(collision.relativeVelocity.magnitude);
 
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                print(contact.thisCollider.name + " hit " + contact.otherCollider.name);
+                // Visualize the contact point
+                Debug.DrawRay(contact.point, contact.normal, Color.red);
+            }
+
             if (collision.relativeVelocity.magnitude < _maxVel)
             {
                 collision.rigidbody.isKinematic = true;

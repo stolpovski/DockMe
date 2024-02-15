@@ -36,11 +36,15 @@ namespace DockMe
         public Vector3 Position => transform.position;
         public Vector3 Velocity => _rigidbody.velocity;
 
-
+        internal void CompleteDocking()
+        {
+            Debug.Log("CompleteDocking");
+        }
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            //_rigidbody.centerOfMass = new Vector3(0, 0, -0.7078f);
             Propellant = GetComponent<Propellant>();
             if (!photonView.IsMine)
             {

@@ -28,6 +28,7 @@ namespace DockMe
 
         private void Awake()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
         }
 
@@ -67,7 +68,7 @@ namespace DockMe
 
             _velocity.text = String.Format(
                 CultureInfo.InvariantCulture,
-                "{0:F1}\n{1:F1}\n{2:F2}",
+                "{0:F2}\n{1:F2}\n{2:F2}",
                 _spacecraft.Velocity.x,
                 _spacecraft.Velocity.y,
                 _spacecraft.Velocity.z
