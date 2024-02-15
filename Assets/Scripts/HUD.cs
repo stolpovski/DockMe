@@ -28,7 +28,7 @@ namespace DockMe
 
         private void Awake()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
             this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
         }
 

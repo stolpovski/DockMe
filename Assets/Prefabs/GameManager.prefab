@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a726d7e7550be489a8047faba66f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2879989148382593959, guid: e6486ea231bb2be429d1f4b28148fbd3, type: 3}
-  IsRotate: 0
+  _playerPrefab: {fileID: 2879989148382593959, guid: e6486ea231bb2be429d1f4b28148fbd3, type: 3}
+  _positionRange: 30
+  _rotationRange: 0
