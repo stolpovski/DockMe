@@ -5003,8 +5003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
-  _force: 1
+  _force: 10
   _vfx: {fileID: 1890446871996000133}
   _sfx: {fileID: 736264455982972453}
   _isRunning: 0
-  _consumption: 0.1
+  _consumption: 0.05
