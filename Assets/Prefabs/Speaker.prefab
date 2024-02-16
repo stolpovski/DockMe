@@ -157,7 +157,7 @@ AudioDistortionFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799973403593596167}
   m_Enabled: 1
-  m_DistortionLevel: 0.95
+  m_DistortionLevel: 0.97
 --- !u!165 &6387731154183591030
 AudioHighPassFilter:
   m_ObjectHideFlags: 0

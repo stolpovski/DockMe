@@ -15,23 +15,23 @@ namespace DockMe
 
         public void StartTransmit()
         {
-            if (_outroBeep.isPlaying)
+/*            if (_outroBeep.isPlaying)
             {
                 _outroBeep.Stop();
             }
 
-            _introBeep.Play();
+            _introBeep.Play();*/
             _recorder.TransmitEnabled = true;
         }
 
         public void StopTransmit()
         {
-            if (_introBeep.isPlaying)
+            /*if (_introBeep.isPlaying)
             {
                 _introBeep.Stop();
-            }
-            
-            _outroBeep.Play();
+            }*/
+
+            _introBeep.Play();
             _recorder.TransmitEnabled = false;
         }
     }

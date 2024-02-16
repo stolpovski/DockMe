@@ -6,6 +6,7 @@ namespace DockMe
 {
     public class Drogue : MonoBehaviour
     {
+        public Transform probe;
         private bool _hasDocked;
         private AudioSource _confirmed;
         /*private void OnTriggerEnter(Collider other)
@@ -41,6 +42,12 @@ namespace DockMe
             spacecraft.CompleteDocking();
 
 
+        }
+
+        private void Update()
+        {
+            if (probe)
+            Debug.Log(Vector3.Distance(transform.position, probe.position));
         }
     }
 }
