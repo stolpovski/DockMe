@@ -24,6 +24,8 @@ namespace DockMe
         [SerializeField]
         private TMP_Text _velocity;
 
+        [SerializeField] private TMP_Text _log;
+
         private Spacecraft _spacecraft;
         private GameObject _drogue;
 
@@ -41,7 +43,7 @@ namespace DockMe
 
             if (_drogue != null)
             {
-                Debug.Log(_spacecraft.Probe.transform.eulerAngles);
+                //Debug.Log(_spacecraft.Probe.transform.eulerAngles);
             }
 
             _fuelRateRange.text = String.Format(
@@ -85,6 +87,14 @@ namespace DockMe
                 _spacecraft.Velocity.y,
                 _spacecraft.Velocity.z
             );
+
+            string logs = "";
+            foreach (string log in _spacecraft.Log)
+            {
+                logs += log + "\n";
+            }
+
+            _log.text = logs;
 
         }
 

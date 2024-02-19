@@ -790,10 +790,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3325844460986634770}
   - {fileID: 8772633538636545823}
-  - {fileID: 8319505412332499356}
   - {fileID: 5582618333633119032}
+  - {fileID: 3325844460986634770}
+  - {fileID: 8319505412332499356}
   m_Father: {fileID: 4100901352657267671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1479,6 +1479,7 @@ MonoBehaviour:
   _angularVelocity: {fileID: 6320879283633314173}
   _range: {fileID: 615794818418656781}
   _velocity: {fileID: 8832508112266120062}
+  _log: {fileID: 4122520042703468296}
 --- !u!1 &5466934569768987418
 GameObject:
   m_ObjectHideFlags: 0

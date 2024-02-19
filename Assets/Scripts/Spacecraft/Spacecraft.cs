@@ -1,6 +1,8 @@
 using Cinemachine;
 using Photon.Pun;
+using Photon.Realtime;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DockMe
@@ -38,6 +40,7 @@ namespace DockMe
         public Vector3 Velocity => _rigidbody.velocity;
 
         public GameObject Probe;
+        public Queue<string> Log = new Queue<string>();
 
         internal void CompleteDocking()
         {
@@ -54,13 +57,16 @@ namespace DockMe
                 lookCam.Priority = 0;
             }
 
-           
+            Log.Enqueue(photonView.Owner.NickName + " joined");
+
+
         }
 
         private void Start()
         {
             if (!photonView.IsMine && PlayerUiPrefab != null)
             {
+                
                 GameObject _uiGo = Instantiate(PlayerUiPrefab);
                 _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
             }
@@ -74,8 +80,26 @@ namespace DockMe
         }
 
 
-        
+        public override void OnPlayerEnteredRoom(Player other)
+        {
+            //Debug.Lo("OnPlayerEnteredRoom() {0}", other.NickName);
+            if (Log.Count > 2)
+            {
+                Log.Dequeue();
+            }
 
+            Log.Enqueue(other.NickName + " joined");
+        }
+
+        public override void OnPlayerLeftRoom(Player other)
+        {
+            if (Log.Count > 2)
+            {
+                Log.Dequeue();
+            }
+
+            Log.Enqueue(other.NickName + " left");
+        }
     }
 }
 
