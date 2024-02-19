@@ -8,17 +8,39 @@ namespace DockMe
     public class GameManager : MonoBehaviourPunCallbacks
     {
         [SerializeField]
-        private GameObject _playerPrefab;
-
+        private GameObject _stationPrefab;
+        
         [SerializeField]
-        private int _positionRange;
+        private GameObject _spacecraftPrefab;
 
-        [SerializeField]
-        private int _rotationRange;
+        private GameObject _station;
+
+        [SerializeField] private int _rangeXY;
+        [SerializeField] private int _minZ;
+        [SerializeField] private int _maxZ;
+
+        [SerializeField] private int _rotationRange;
 
         private void Start()
         {
-            PhotonNetwork.Instantiate(_playerPrefab.name, Randomizer.Position(_positionRange), Randomizer.Rotation(_rotationRange));
+            if (!_station)
+            {
+                _station = Instantiate(_stationPrefab, Vector3.zero, Quaternion.Euler(
+                    Random.Range(-_rotationRange, _rotationRange),
+                    Random.Range(-_rotationRange, _rotationRange),
+                    Random.Range(-_rotationRange, _rotationRange)
+                ));
+            }
+
+            PhotonNetwork.Instantiate(
+                _spacecraftPrefab.name,
+                new Vector3(Random.Range(-_rangeXY, _rangeXY), Random.Range(-_rangeXY, _rangeXY), Random.Range(_minZ, _maxZ)),
+                Quaternion.Euler(
+                    Random.Range(-_rotationRange, _rotationRange), 
+                    Random.Range(-_rotationRange, _rotationRange), 
+                    Random.Range(-_rotationRange, _rotationRange)
+                )
+            );
         }
 
         public override void OnLeftRoom()

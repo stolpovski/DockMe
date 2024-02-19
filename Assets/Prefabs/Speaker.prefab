@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8040796691462410251}
   - component: {fileID: 903777344095012039}
   - component: {fileID: 7221424892394632104}
-  - component: {fileID: 1153056965211918698}
-  - component: {fileID: 6387731154183591030}
+  - component: {fileID: 8204640470524307391}
+  - component: {fileID: -42008839964492553}
   m_Layer: 0
   m_Name: Speaker
   m_TagString: Untagged
@@ -149,7 +149,7 @@ MonoBehaviour:
     Max: 1000
     SpeedUpPerc: 5
   restartOnDeviceChange: 1
---- !u!170 &1153056965211918698
+--- !u!170 &8204640470524307391
 AudioDistortionFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ AudioDistortionFilter:
   m_GameObject: {fileID: 4799973403593596167}
   m_Enabled: 1
   m_DistortionLevel: 0.97
---- !u!165 &6387731154183591030
+--- !u!165 &-42008839964492553
 AudioHighPassFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -462,6 +462,34 @@ namespace DockMe
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cam"",
+            ""id"": ""a08f6f5d-5fcc-424e-b6da-5a38253d36b2"",
+            ""actions"": [
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""3b61348c-aa92-474d-b093-8b046c31a3fe"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""28d02d7b-6b2d-4b69-a098-b38806c3342b"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=0.05,y=0.05)"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -491,6 +519,9 @@ namespace DockMe
             // Transponder
             m_Transponder = asset.FindActionMap("Transponder", throwIfNotFound: true);
             m_Transponder_Transmit = m_Transponder.FindAction("Transmit", throwIfNotFound: true);
+            // Cam
+            m_Cam = asset.FindActionMap("Cam", throwIfNotFound: true);
+            m_Cam_Look = m_Cam.FindAction("Look", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -836,6 +867,52 @@ namespace DockMe
             }
         }
         public TransponderActions @Transponder => new TransponderActions(this);
+
+        // Cam
+        private readonly InputActionMap m_Cam;
+        private List<ICamActions> m_CamActionsCallbackInterfaces = new List<ICamActions>();
+        private readonly InputAction m_Cam_Look;
+        public struct CamActions
+        {
+            private @GameInput m_Wrapper;
+            public CamActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Look => m_Wrapper.m_Cam_Look;
+            public InputActionMap Get() { return m_Wrapper.m_Cam; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CamActions set) { return set.Get(); }
+            public void AddCallbacks(ICamActions instance)
+            {
+                if (instance == null || m_Wrapper.m_CamActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_CamActionsCallbackInterfaces.Add(instance);
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+            }
+
+            private void UnregisterCallbacks(ICamActions instance)
+            {
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
+            }
+
+            public void RemoveCallbacks(ICamActions instance)
+            {
+                if (m_Wrapper.m_CamActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(ICamActions instance)
+            {
+                foreach (var item in m_Wrapper.m_CamActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_CamActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public CamActions @Cam => new CamActions(this);
         public interface IEngineActions
         {
             void OnTranslateForward(InputAction.CallbackContext context);
@@ -864,6 +941,10 @@ namespace DockMe
         public interface ITransponderActions
         {
             void OnTransmit(InputAction.CallbackContext context);
+        }
+        public interface ICamActions
+        {
+            void OnLook(InputAction.CallbackContext context);
         }
     }
 }

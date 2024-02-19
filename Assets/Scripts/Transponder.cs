@@ -7,15 +7,14 @@ namespace DockMe
     {
         private GameInput _input;
         private MissionControl _missionControl;
-        private bool _wasStarted;
 
         private void Awake()
         {
             _missionControl = GameObject.Find("MissionControl").GetComponent<MissionControl>();
 
             _input = new GameInput();
-            _input.Transponder.Transmit.performed += context => OnStartTransmit();
-            _input.Transponder.Transmit.canceled += context => OnStopTransmit();
+            _input.Transponder.Transmit.performed += context => StartTransmit();
+            _input.Transponder.Transmit.canceled += context => StopTransmit();
         }
 
         public override void OnEnable()
@@ -30,37 +29,23 @@ namespace DockMe
             _input.Transponder.Disable();
         }
 
-        private void OnStartTransmit()
-        {
-            if (!photonView.IsMine || _missionControl.IsTransmitting)
-            {
-                return;
-            }
-
-            photonView.RPC("StartTransmit", RpcTarget.All);
-            _wasStarted = true;
-        }
-
-        private void OnStopTransmit()
-        {
-            if (!photonView.IsMine || !_wasStarted)
-            {
-                return;
-            }
-
-            photonView.RPC("StopTransmit", RpcTarget.All);
-            _wasStarted = false;
-        }
-
-        [PunRPC]
         private void StartTransmit()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+
             _missionControl.StartTransmit();
         }
 
-        [PunRPC]
         private void StopTransmit()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+
             _missionControl.StopTransmit();
         }
     }

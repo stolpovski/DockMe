@@ -11,6 +11,7 @@ namespace DockMe
         public Propellant Propellant;
 
 
+
         public CinemachineFreeLook lookCam;
 
         [SerializeField]
@@ -35,6 +36,8 @@ namespace DockMe
 
         public Vector3 Position => transform.position;
         public Vector3 Velocity => _rigidbody.velocity;
+
+        public GameObject Probe;
 
         internal void CompleteDocking()
         {

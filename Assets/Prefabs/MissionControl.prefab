@@ -99,7 +99,7 @@ MonoBehaviour:
   reliableMode: 0
   encrypt: 0
   transmitEnabled: 0
-  samplingRate: 24000
+  samplingRate: 48000
   frameDuration: 20000
   bitrate: 30000
   sourceType: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541ea5522b9344747a91deb2f164e29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _introBeep: {fileID: 7287291068773367033}
-  _outroBeep: {fileID: 2147628997504530966}
+  _introBeep: {fileID: 0}
+  _outroBeep: {fileID: 0}
   _recorder: {fileID: 5198789919646495434}
 --- !u!1 &2427039838645535882
 GameObject:
