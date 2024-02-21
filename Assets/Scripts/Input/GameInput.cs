@@ -475,6 +475,15 @@ namespace DockMe
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""8c31aed8-c119-4fda-b5f5-06cdd361c10c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -486,6 +495,17 @@ namespace DockMe
                     ""processors"": ""ScaleVector2(x=0.05,y=0.05)"",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56155ddb-95f1-471e-a722-516e9b493e82"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=-1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -522,6 +542,7 @@ namespace DockMe
             // Cam
             m_Cam = asset.FindActionMap("Cam", throwIfNotFound: true);
             m_Cam_Look = m_Cam.FindAction("Look", throwIfNotFound: true);
+            m_Cam_Zoom = m_Cam.FindAction("Zoom", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -872,11 +893,13 @@ namespace DockMe
         private readonly InputActionMap m_Cam;
         private List<ICamActions> m_CamActionsCallbackInterfaces = new List<ICamActions>();
         private readonly InputAction m_Cam_Look;
+        private readonly InputAction m_Cam_Zoom;
         public struct CamActions
         {
             private @GameInput m_Wrapper;
             public CamActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Look => m_Wrapper.m_Cam_Look;
+            public InputAction @Zoom => m_Wrapper.m_Cam_Zoom;
             public InputActionMap Get() { return m_Wrapper.m_Cam; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -889,6 +912,9 @@ namespace DockMe
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
 
             private void UnregisterCallbacks(ICamActions instance)
@@ -896,6 +922,9 @@ namespace DockMe
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
+                @Zoom.started -= instance.OnZoom;
+                @Zoom.performed -= instance.OnZoom;
+                @Zoom.canceled -= instance.OnZoom;
             }
 
             public void RemoveCallbacks(ICamActions instance)
@@ -945,6 +974,7 @@ namespace DockMe
         public interface ICamActions
         {
             void OnLook(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
         }
     }
 }
