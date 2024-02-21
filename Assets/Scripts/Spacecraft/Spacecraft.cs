@@ -37,7 +37,7 @@ namespace DockMe
         public Vector3 AngularVelocity => _rigidbody.angularVelocity;
 
         public Vector3 Position => transform.position;
-        public Vector3 Velocity => _rigidbody.velocity;
+        public Vector3 Velocity => transform.InverseTransformDirection(_rigidbody.velocity);
 
         public GameObject Probe;
         public Queue<string> Log = new Queue<string>();

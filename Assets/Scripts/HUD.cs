@@ -71,14 +71,9 @@ namespace DockMe
                 _spacecraft.AngularVelocity.z * RadianDegrees
             );
 
-            _range.text = String.Format(
-                CultureInfo.InvariantCulture,
-                "{0:F2}\n{1:F2}\n{2:F2}",
-                _spacecraft.Probe.transform.position.x - _drogue.transform.position.x,
-                _spacecraft.Probe.transform.position.y - _drogue.transform.position.y,
-                _spacecraft.Probe.transform.position.z - _drogue.transform.position.z
-              
-            );
+            UpdateDistance();
+
+            
 
             _velocity.text = String.Format(
                 CultureInfo.InvariantCulture,
@@ -96,6 +91,21 @@ namespace DockMe
 
             _log.text = logs;
 
+        }
+
+        private void UpdateDistance()
+        {
+            Vector3 drogueLocal = _drogue.transform.InverseTransformPoint(_spacecraft.Probe.transform.position);
+            Vector3 probeLocal = _spacecraft.Probe.transform.InverseTransformPoint(_drogue.transform.position);
+            
+            _range.text = String.Format(
+                CultureInfo.InvariantCulture,
+                "{0:F2}\n{1:F2}\n{2:F2}",
+                drogueLocal.x - probeLocal.x,
+                drogueLocal.y - probeLocal.y,
+                drogueLocal.z - probeLocal.z
+
+            );
         }
 
         public void SetSpacecraft(Spacecraft spacecraft)
