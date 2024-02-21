@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
 
 namespace DockMe
 {
@@ -36,8 +35,8 @@ namespace DockMe
                 _spacecraftPrefab.name,
                 new Vector3(Random.Range(-_rangeXY, _rangeXY), Random.Range(-_rangeXY, _rangeXY), Random.Range(_minZ, _maxZ)),
                 Quaternion.Euler(
-                    Random.Range(-_rotationRange, _rotationRange), 
-                    Random.Range(-_rotationRange, _rotationRange), 
+                    Random.Range(-_rotationRange, _rotationRange),
+                    Random.Range(-_rotationRange, _rotationRange),
                     Random.Range(-_rotationRange, _rotationRange)
                 )
             );
@@ -51,16 +50,6 @@ namespace DockMe
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
-        }
-
-        public override void OnPlayerEnteredRoom(Player other)
-        {
-            Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName);
-        }
-
-        public override void OnPlayerLeftRoom(Player other)
-        {
-            Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName);
         }
     }
 }

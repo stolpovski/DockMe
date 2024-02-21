@@ -59,6 +59,7 @@ MonoBehaviour:
   - PlayOutroTone
   - StartTransmit
   - StopTransmit
+  - ToggleFlashlight
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

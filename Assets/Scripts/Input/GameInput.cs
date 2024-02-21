@@ -386,7 +386,7 @@ namespace DockMe
                 {
                     ""name"": """",
                     ""id"": ""3b3e6ec6-2fd1-471a-8813-86d7acec065a"",
-                    ""path"": ""<Keyboard>/capsLock"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

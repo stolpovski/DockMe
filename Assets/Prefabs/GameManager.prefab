@@ -49,4 +49,4 @@ MonoBehaviour:
   _rangeXY: 20
   _minZ: 30
   _maxZ: 40
-  _rotationRange: 0
+  _rotationRange: 180
