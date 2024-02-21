@@ -32,7 +32,7 @@ namespace DockMe
         private void Awake()
         {
             //Cursor.lockState = CursorLockMode.Locked;
-            this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
+            this.transform.SetParent(GameObject.Find("Hud").GetComponent<Transform>(), false);
             _drogue = GameObject.Find("Drogue");
         }
 

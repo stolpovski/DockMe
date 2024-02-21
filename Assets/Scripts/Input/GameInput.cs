@@ -344,7 +344,7 @@ namespace DockMe
             ""id"": ""8a225835-7224-463c-9267-8791229d9cb1"",
             ""actions"": [
                 {
-                    ""name"": ""ChangeView"",
+                    ""name"": ""ToggleView"",
                     ""type"": ""Button"",
                     ""id"": ""000e7f9e-7af5-4555-baf2-a356914f2774"",
                     ""expectedControlType"": ""Button"",
@@ -379,7 +379,7 @@ namespace DockMe
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeView"",
+                    ""action"": ""ToggleView"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -530,7 +530,7 @@ namespace DockMe
             m_Engine_RollLeft = m_Engine.FindAction("RollLeft", throwIfNotFound: true);
             // Spacecraft
             m_Spacecraft = asset.FindActionMap("Spacecraft", throwIfNotFound: true);
-            m_Spacecraft_ChangeView = m_Spacecraft.FindAction("ChangeView", throwIfNotFound: true);
+            m_Spacecraft_ToggleView = m_Spacecraft.FindAction("ToggleView", throwIfNotFound: true);
             m_Spacecraft_ToggleFlashlight = m_Spacecraft.FindAction("ToggleFlashlight", throwIfNotFound: true);
             m_Spacecraft_ToggleTransmit = m_Spacecraft.FindAction("ToggleTransmit", throwIfNotFound: true);
             // UI
@@ -738,14 +738,14 @@ namespace DockMe
         // Spacecraft
         private readonly InputActionMap m_Spacecraft;
         private List<ISpacecraftActions> m_SpacecraftActionsCallbackInterfaces = new List<ISpacecraftActions>();
-        private readonly InputAction m_Spacecraft_ChangeView;
+        private readonly InputAction m_Spacecraft_ToggleView;
         private readonly InputAction m_Spacecraft_ToggleFlashlight;
         private readonly InputAction m_Spacecraft_ToggleTransmit;
         public struct SpacecraftActions
         {
             private @GameInput m_Wrapper;
             public SpacecraftActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @ChangeView => m_Wrapper.m_Spacecraft_ChangeView;
+            public InputAction @ToggleView => m_Wrapper.m_Spacecraft_ToggleView;
             public InputAction @ToggleFlashlight => m_Wrapper.m_Spacecraft_ToggleFlashlight;
             public InputAction @ToggleTransmit => m_Wrapper.m_Spacecraft_ToggleTransmit;
             public InputActionMap Get() { return m_Wrapper.m_Spacecraft; }
@@ -757,9 +757,9 @@ namespace DockMe
             {
                 if (instance == null || m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_SpacecraftActionsCallbackInterfaces.Add(instance);
-                @ChangeView.started += instance.OnChangeView;
-                @ChangeView.performed += instance.OnChangeView;
-                @ChangeView.canceled += instance.OnChangeView;
+                @ToggleView.started += instance.OnToggleView;
+                @ToggleView.performed += instance.OnToggleView;
+                @ToggleView.canceled += instance.OnToggleView;
                 @ToggleFlashlight.started += instance.OnToggleFlashlight;
                 @ToggleFlashlight.performed += instance.OnToggleFlashlight;
                 @ToggleFlashlight.canceled += instance.OnToggleFlashlight;
@@ -770,9 +770,9 @@ namespace DockMe
 
             private void UnregisterCallbacks(ISpacecraftActions instance)
             {
-                @ChangeView.started -= instance.OnChangeView;
-                @ChangeView.performed -= instance.OnChangeView;
-                @ChangeView.canceled -= instance.OnChangeView;
+                @ToggleView.started -= instance.OnToggleView;
+                @ToggleView.performed -= instance.OnToggleView;
+                @ToggleView.canceled -= instance.OnToggleView;
                 @ToggleFlashlight.started -= instance.OnToggleFlashlight;
                 @ToggleFlashlight.performed -= instance.OnToggleFlashlight;
                 @ToggleFlashlight.canceled -= instance.OnToggleFlashlight;
@@ -959,7 +959,7 @@ namespace DockMe
         }
         public interface ISpacecraftActions
         {
-            void OnChangeView(InputAction.CallbackContext context);
+            void OnToggleView(InputAction.CallbackContext context);
             void OnToggleFlashlight(InputAction.CallbackContext context);
             void OnToggleTransmit(InputAction.CallbackContext context);
         }

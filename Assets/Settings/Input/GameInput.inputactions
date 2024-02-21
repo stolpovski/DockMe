@@ -320,7 +320,7 @@
             "id": "8a225835-7224-463c-9267-8791229d9cb1",
             "actions": [
                 {
-                    "name": "ChangeView",
+                    "name": "ToggleView",
                     "type": "Button",
                     "id": "000e7f9e-7af5-4555-baf2-a356914f2774",
                     "expectedControlType": "Button",
@@ -355,7 +355,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeView",
+                    "action": "ToggleView",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

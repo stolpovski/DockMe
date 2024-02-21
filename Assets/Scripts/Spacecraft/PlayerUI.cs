@@ -34,7 +34,7 @@ namespace DockMe
 
         private void Awake()
         {
-            this.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
+            this.transform.SetParent(GameObject.Find("Players").GetComponent<Transform>(), false);
             _canvasGroup = this.GetComponent<CanvasGroup>();
         }
 

@@ -27,7 +27,7 @@ public class SpacecraftController : MonoBehaviourPunCallbacks
         _body = GetComponent<Rigidbody>();
         _gameInput = new GameInput();
 
-        _gameInput.Spacecraft.ChangeView.performed += context => ChangeView();
+        //_gameInput.Spacecraft.ChangeView.performed += context => ChangeView();
         _gameInput.Spacecraft.ToggleFlashlight.performed += context => ToggleFlashlight();
     }
 

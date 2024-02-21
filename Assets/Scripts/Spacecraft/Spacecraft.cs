@@ -1,4 +1,3 @@
-using Cinemachine;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -9,21 +8,13 @@ namespace DockMe
 {
     public class Spacecraft : MonoBehaviourPunCallbacks
     {
-        [NonSerialized]
-        public Propellant Propellant;
-
-
-
-        public CinemachineFreeLook lookCam;
-
-        [SerializeField]
+        [NonSerialized] public Propellant Propellant;
+        
         public GameObject PlayerUiPrefab;
 
         [SerializeField]
         private GameObject _hudPrefab;
-
-
-
+        
         [SerializeField]
         private Vector3 vel;
 
@@ -49,18 +40,21 @@ namespace DockMe
 
         private void Awake()
         {
+            
+            
             _rigidbody = GetComponent<Rigidbody>();
             //_rigidbody.centerOfMass = new Vector3(0, 0, -0.7078f);
             Propellant = GetComponent<Propellant>();
-            if (!photonView.IsMine)
-            {
-                lookCam.Priority = 0;
-            }
+            
 
             Log.Enqueue(photonView.Owner.NickName + " joined");
 
 
         }
+
+        
+
+        
 
         private void Start()
         {
