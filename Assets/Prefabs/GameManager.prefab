@@ -47,6 +47,6 @@ MonoBehaviour:
   _stationPrefab: {fileID: 6116057674608722833, guid: ed0acbe7c42a72f47972bbba912179f9, type: 3}
   _spacecraftPrefab: {fileID: 2879989148382593959, guid: e6486ea231bb2be429d1f4b28148fbd3, type: 3}
   _rangeXY: 20
-  _minZ: 30
-  _maxZ: 40
+  _minZ: -30
+  _maxZ: -40
   _rotationRange: 180

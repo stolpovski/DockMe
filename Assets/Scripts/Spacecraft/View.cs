@@ -24,8 +24,13 @@ namespace DockMe
                 _lookCam.Priority = 0;
             }
 
-            _frontView = GameObject.Find("FrontView");
-            _frontView.SetActive(false);
+            if (photonView.IsMine)
+            {
+                _frontView = GameObject.Find("FrontView");
+                _frontView.SetActive(false);
+            }
+
+            
         }
 
         public override void OnEnable()
