@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class Thruster : MonoBehaviour
     {

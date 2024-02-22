@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class Propellant : MonoBehaviour, IPunObservable
     {

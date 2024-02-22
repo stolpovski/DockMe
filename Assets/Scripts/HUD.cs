@@ -3,7 +3,7 @@ using System.Globalization;
 using TMPro;
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class HUD : MonoBehaviour
     {

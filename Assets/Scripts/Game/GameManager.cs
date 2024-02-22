@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {

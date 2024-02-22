@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace DockMe
+namespace SkyDocker
 {
     public partial class @GameInput: IInputActionCollection2, IDisposable
     {
@@ -436,7 +436,7 @@ namespace DockMe
             ]
         },
         {
-            ""name"": ""Transponder"",
+            ""name"": ""Transmitter"",
             ""id"": ""14e633ef-d0e7-4076-b8d8-a972685c8ec9"",
             ""actions"": [
                 {
@@ -536,9 +536,9 @@ namespace DockMe
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
-            // Transponder
-            m_Transponder = asset.FindActionMap("Transponder", throwIfNotFound: true);
-            m_Transponder_Transmit = m_Transponder.FindAction("Transmit", throwIfNotFound: true);
+            // Transmitter
+            m_Transmitter = asset.FindActionMap("Transmitter", throwIfNotFound: true);
+            m_Transmitter_Transmit = m_Transmitter.FindAction("Transmit", throwIfNotFound: true);
             // Cam
             m_Cam = asset.FindActionMap("Cam", throwIfNotFound: true);
             m_Cam_Look = m_Cam.FindAction("Look", throwIfNotFound: true);
@@ -843,51 +843,51 @@ namespace DockMe
         }
         public UIActions @UI => new UIActions(this);
 
-        // Transponder
-        private readonly InputActionMap m_Transponder;
-        private List<ITransponderActions> m_TransponderActionsCallbackInterfaces = new List<ITransponderActions>();
-        private readonly InputAction m_Transponder_Transmit;
-        public struct TransponderActions
+        // Transmitter
+        private readonly InputActionMap m_Transmitter;
+        private List<ITransmitterActions> m_TransmitterActionsCallbackInterfaces = new List<ITransmitterActions>();
+        private readonly InputAction m_Transmitter_Transmit;
+        public struct TransmitterActions
         {
             private @GameInput m_Wrapper;
-            public TransponderActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Transmit => m_Wrapper.m_Transponder_Transmit;
-            public InputActionMap Get() { return m_Wrapper.m_Transponder; }
+            public TransmitterActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Transmit => m_Wrapper.m_Transmitter_Transmit;
+            public InputActionMap Get() { return m_Wrapper.m_Transmitter; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(TransponderActions set) { return set.Get(); }
-            public void AddCallbacks(ITransponderActions instance)
+            public static implicit operator InputActionMap(TransmitterActions set) { return set.Get(); }
+            public void AddCallbacks(ITransmitterActions instance)
             {
-                if (instance == null || m_Wrapper.m_TransponderActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_TransponderActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_TransmitterActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_TransmitterActionsCallbackInterfaces.Add(instance);
                 @Transmit.started += instance.OnTransmit;
                 @Transmit.performed += instance.OnTransmit;
                 @Transmit.canceled += instance.OnTransmit;
             }
 
-            private void UnregisterCallbacks(ITransponderActions instance)
+            private void UnregisterCallbacks(ITransmitterActions instance)
             {
                 @Transmit.started -= instance.OnTransmit;
                 @Transmit.performed -= instance.OnTransmit;
                 @Transmit.canceled -= instance.OnTransmit;
             }
 
-            public void RemoveCallbacks(ITransponderActions instance)
+            public void RemoveCallbacks(ITransmitterActions instance)
             {
-                if (m_Wrapper.m_TransponderActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_TransmitterActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(ITransponderActions instance)
+            public void SetCallbacks(ITransmitterActions instance)
             {
-                foreach (var item in m_Wrapper.m_TransponderActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_TransmitterActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_TransponderActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_TransmitterActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public TransponderActions @Transponder => new TransponderActions(this);
+        public TransmitterActions @Transmitter => new TransmitterActions(this);
 
         // Cam
         private readonly InputActionMap m_Cam;
@@ -967,7 +967,7 @@ namespace DockMe
         {
             void OnSubmit(InputAction.CallbackContext context);
         }
-        public interface ITransponderActions
+        public interface ITransmitterActions
         {
             void OnTransmit(InputAction.CallbackContext context);
         }

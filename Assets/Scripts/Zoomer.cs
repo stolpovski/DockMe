@@ -2,7 +2,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class Zoomer : MonoBehaviour
     {

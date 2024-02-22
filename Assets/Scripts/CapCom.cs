@@ -2,7 +2,7 @@ using Photon.Pun;
 using Photon.Voice.Unity;
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class CapCom : MonoBehaviourPunCallbacks
     {
@@ -17,20 +17,20 @@ namespace DockMe
             _recorder = GameObject.Find("MissionControl").GetComponent<Recorder>();
 
             _gameInput = new GameInput();
-            _gameInput.Transponder.Transmit.performed += context => OnStartTransmit();
-            _gameInput.Transponder.Transmit.canceled += context => OnStopTransmit();
+            _gameInput.Transmitter.Transmit.performed += context => OnStartTransmit();
+            _gameInput.Transmitter.Transmit.canceled += context => OnStopTransmit();
         }
 
         public override void OnEnable()
         {
             base.OnEnable();
-            _gameInput.Transponder.Enable();
+            _gameInput.Transmitter.Enable();
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            _gameInput.Transponder.Disable();
+            _gameInput.Transmitter.Disable();
         }
 
         private void OnStartTransmit()

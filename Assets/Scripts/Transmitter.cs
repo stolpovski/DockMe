@@ -1,32 +1,32 @@
 using Photon.Pun;
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
-    public class Transponder : MonoBehaviourPunCallbacks
+    public class Transmitter : MonoBehaviourPunCallbacks
     {
         private GameInput _input;
-        private MissionControl _missionControl;
+        private Radio _radio;
 
         private void Awake()
         {
-            _missionControl = GameObject.Find("MissionControl").GetComponent<MissionControl>();
-
             _input = new GameInput();
-            _input.Transponder.Transmit.performed += context => StartTransmit();
-            _input.Transponder.Transmit.canceled += context => StopTransmit();
+            _input.Transmitter.Transmit.performed += context => StartTransmit();
+            _input.Transmitter.Transmit.canceled += context => StopTransmit();
+
+            _radio = GameObject.Find("Radio").GetComponent<Radio>();
         }
 
         public override void OnEnable()
         {
             base.OnEnable();
-            _input.Transponder.Enable();
+            _input.Transmitter.Enable();
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            _input.Transponder.Disable();
+            _input.Transmitter.Disable();
         }
 
         private void StartTransmit()
@@ -36,7 +36,7 @@ namespace DockMe
                 return;
             }
 
-            _missionControl.StartTransmit();
+            _radio.StartTransmit();
         }
 
         private void StopTransmit()
@@ -46,8 +46,14 @@ namespace DockMe
                 return;
             }
 
-            _missionControl.StopTransmit();
+            _radio.StopTransmit();
+            photonView.RPC("Beep", RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void Beep()
+        {
+            _radio.Beep();
         }
     }
 }
-

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DockMe
+namespace SkyDocker
 {
     public static class Randomizer
     {

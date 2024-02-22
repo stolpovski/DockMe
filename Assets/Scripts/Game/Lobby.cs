@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DockMe
+namespace SkyDocker
 {
     public class Lobby : MonoBehaviourPunCallbacks
     {
