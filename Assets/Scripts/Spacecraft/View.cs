@@ -1,7 +1,5 @@
 using Cinemachine;
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SkyDocker
@@ -16,6 +14,8 @@ namespace SkyDocker
 
         private void Awake()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             _input = new GameInput();
             _input.Spacecraft.ToggleView.performed += context => ToggleView();
 

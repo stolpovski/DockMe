@@ -730,9 +730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37da53df78c869449847e2e021e0f1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxAmount: 500
+  MaxAmount: 900
   Amount: 0
-  _isEndless: 1
+  _isEndless: 0
 --- !u!114 &1142635028853997236
 MonoBehaviour:
   m_ObjectHideFlags: 0
